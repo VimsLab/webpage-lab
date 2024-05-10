@@ -9,7 +9,7 @@ import StatsBox from '../components/StatsBox';
 import customerData from '../data/customer-data';
 import HeroImage from '../svg/HeroImage';
 import SvgCharts from '../svg/SvgCharts';
-
+import logo from "../images/landing-glasses.jpg"
 
 const Index = () => (
   <Layout>
@@ -28,6 +28,7 @@ const Index = () => (
           <p className="mt-4 text-gray-600">Sed fermentum felis ut cursu</p>
         </div>
         <div className="lg:w-1/2">
+          <img src={logo} alt="Logo" />
         </div>
       </div>
     </section>
