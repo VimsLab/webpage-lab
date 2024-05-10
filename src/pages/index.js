@@ -10,6 +10,7 @@ import customerData from '../data/customer-data';
 import HeroImage from '../svg/HeroImage';
 import SvgCharts from '../svg/SvgCharts';
 import logo from "../images/landing-glasses.jpg"
+import { StaticImage } from "gatsby-plugin-image"
 
 const Index = () => (
   <Layout>
@@ -28,7 +29,7 @@ const Index = () => (
           <p className="mt-4 text-gray-600">Sed fermentum felis ut cursu</p>
         </div>
         <div className="lg:w-1/2">
-          <img src={logo} alt="Logo" />
+          <StaticImage src="../images/landing-glasses.jpg" alt="Logo" />
         </div>
       </div>
     </section>

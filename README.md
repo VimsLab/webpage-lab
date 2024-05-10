@@ -6,11 +6,17 @@ Note that you do not need to have anything else installed in advance to make thi
 - Clone this repo
 In the terminal
 - `npm install`. This command will install all the needed dependencies with the right versions of each. When you run this command, the folder `node_modules` will be created. If you get an error, try changing to a different node version using `nvm` (`nvm use v16.20.2` worked for Daniela)
-### Run in Windows
+### Run on Windows
 - In Powershell run `npm run develop` to start the dev site.
 
-### Run in Linux
+### Run on Linux
 - Run `gatsby develop` to start the dev site.
+
+
+## Build
+### on Linux
+- `nvm use v16.20.2`
+- `npm run build`
 
 ## Notes
 
