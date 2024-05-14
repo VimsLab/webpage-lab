@@ -1,14 +1,21 @@
 import React from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import LogoIcon from '../../svg/LogoIcon';
+import { StaticImage } from "gatsby-plugin-image"
 import Button from '../Button';
+import {Helmet} from "react-helmet";
+import favicon from '../../images/logo-only.png'
 
 const Header = () => (
   <header className="sticky top-0 bg-white shadow">
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>Big Data Vision - VIMS Lab @ University of Delaware</title>
+      <meta name="icon" href={favicon} />
+    </Helmet>
     <div className="container flex flex-col sm:flex-row justify-between items-center mx-auto py-4 px-8">
       <div className="flex items-center text-2xl">
         <div className="w-12 mr-3">
-          <LogoIcon />
+          <StaticImage src="../../images/logo-only.png" alt="Logo" />
         </div>
         VIMS Lab
       </div>
@@ -22,8 +29,8 @@ const Header = () => (
         <AnchorLink className="px-4" href="#stats">
           People
         </AnchorLink>
-        <AnchorLink className="px-4" href="#testimonials">
-          Media
+        <AnchorLink className="px-4" href="#news">
+          News
         </AnchorLink>
         <AnchorLink className="px-4" href="#testimonials">
           Resources

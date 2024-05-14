@@ -1,24 +1,35 @@
 import React from 'react';
-import Button from '../components/Button';
-import Card from '../components/Card';
 import CustomerCard from '../components/CustomerCard';
 import LabelText from '../components/LabelText';
 import Layout from '../components/layout/Layout';
 import SplitSection from '../components/SplitSection';
 import StatsBox from '../components/StatsBox';
+import newsData from '../data/news-data';
 import customerData from '../data/customer-data';
 import HeroImage from '../svg/HeroImage';
 import SvgCharts from '../svg/SvgCharts';
-import logo from "../images/landing-glasses.jpg"
 import { StaticImage } from "gatsby-plugin-image"
+import Image from '../components/ImageComponent'
+import { GatsbyImagesProvider } from '../components/ImagesContext'
 
-const Index = () => (
+
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import { graphql } from 'gatsby';
+
+const Index = ({data}) => (
   <Layout>
     <section className="pt-20 md:pt-40">
       <div className="container mx-auto px-8 lg:flex">
         <div className="text-center lg:text-left lg:w-1/2">
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
-            Where Vision Becomes Reality
+            Transforming Big Data into Reality: Your Vision, Our Mission
           </h1>
           <p className="text-xl lg:text-2xl mt-6 font-light">
             Discover VIMS Lab @ University of Delaware
@@ -29,7 +40,7 @@ const Index = () => (
           <p className="mt-4 text-gray-600">Sed fermentum felis ut cursu</p>
         </div>
         <div className="lg:w-1/2">
-          <StaticImage src="../images/landing-glasses.jpg" alt="Logo" />
+          <StaticImage src="../images/landing-glasses.jpg" alt="Landing" />
         </div>
       </div>
     </section>
@@ -125,6 +136,41 @@ const Index = () => (
         </div>
       </div>
     </section>
+    <section id="news" className="py-20 lg:py-40">
+      <div className="container mx-auto">
+        <LabelText className="mb-8 text-gray-600 text-center">News</LabelText>
+        <div className="grid grid-cols-3 items-stretch md:flex-row md:-mx-3">
+
+          {newsData.map(news => (
+            <div key={news.key} className="flex-1 px-3">
+
+              <Card className="flex flex-col mt-6 w-96 h-full">
+                <CardHeader color="blue-gray" className="relative h-56">
+                 <GatsbyImagesProvider>
+                  <Image src={news.image} alt="card-image" />
+                </GatsbyImagesProvider>
+                  {/*<StaticImage src="../images/news/cheers-academic-elite-article.png" alt="Landing" />*/}
+
+                </CardHeader>
+                <CardBody>
+                  <Typography variant="h5" color="blue-gray" className="mb-2">
+                    {news.title}
+                  </Typography>
+                  <Typography>
+                    {news.content}
+                  </Typography>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <a href={news.readMore}>
+                    <Button>Read More</Button>
+                  </a>
+                </CardFooter>
+              </Card>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
     <section id="testimonials" className="py-20 lg:py-40">
       <div className="container mx-auto">
         <LabelText className="mb-8 text-gray-600 text-center">What customers are saying</LabelText>
@@ -147,6 +193,9 @@ const Index = () => (
       </p>
     </section>
   </Layout>
+
 );
+
+
 
 export default Index;
