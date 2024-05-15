@@ -20,7 +20,7 @@ const Header = () => (
         VIMS Lab
       </div>
       <div className="flex mt-4 sm:mt-0">
-        <AnchorLink className="px-4" href="#features">
+        <AnchorLink className="px-4" href="#projects">
           Projects
         </AnchorLink>
         <AnchorLink className="px-4" href="#services">
