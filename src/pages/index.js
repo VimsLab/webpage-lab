@@ -6,12 +6,12 @@ import SplitSection from '../components/SplitSection';
 import StatsBox from '../components/StatsBox';
 import newsData from '../data/news-data';
 import projectsData from '../data/projects-data';
-import customerData from '../data/customer-data';
+import teamData from '../data/team-data';
 import HeroImage from '../svg/HeroImage';
 import SvgCharts from '../svg/SvgCharts';
-import { StaticImage } from "gatsby-plugin-image"
-import Image from '../components/ImageComponent'
-import { GatsbyImagesProvider } from '../components/ImagesContext'
+import { StaticImage } from 'gatsby-plugin-image';
+import Image from '../components/ImageComponent';
+import { GatsbyImagesProvider } from '../components/ImagesContext';
 
 
 import {
@@ -20,11 +20,12 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Button,
-} from "@material-tailwind/react";
+  Button
+  // Tooltip
+} from '@material-tailwind/react';
 import { graphql } from 'gatsby';
 
-const Index = ({data}) => (
+const Index = ({ data }) => (
   <Layout>
     <section className="pt-20 md:pt-40">
       <div className="container mx-auto px-8 lg:flex">
@@ -49,62 +50,64 @@ const Index = ({data}) => (
     <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl lg:text-5xl font-semibold">Projects</h2>
-        <p className='mt-4'>
-        There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the following research areas:
-        Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis, and more.
+        <p className="mt-4">
+          There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the
+          following research areas:
+          Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis,
+          and more.
         </p>
         <br></br><br></br><br></br>
         {projectsData.map(projects => (
-            <div key={projects.key} className="flex-1 px-3">
-              {/* <Card className="flex flex-col mt-6 w-96 h-full">
+          <div key={projects.key} className="flex-1 px-3">
+            {/* <Card className="flex flex-col mt-6 w-96 h-full">
                 <CardHeader color="blue-gray" className="relative h-56"></CardHeader> */}
-              <Card className="w-full max-w-[48rem] flex-row">
-                  <CardHeader
-                    shadow={false}
-                    floated={false}
-                    className="m-0 w-1/12 shrink-0 rounded-r-none"
-                    // className="mt-0 flex-none w-100 h-100 rounded-r-none"
-                    // className='m-0 shrink h-100'
-                    >
-                    <GatsbyImagesProvider>
-                      {/* <div className='flex-none w-50 h-50'> */}
-                      <Image src={projects.image} alt="card-image" />
-                      {/* </div> */}
-                    </GatsbyImagesProvider>
-                  </CardHeader>
-                <CardBody>
-                  {/* <Typography variant="h6" color="gray" className="mb-4 uppercase">
+            <Card className="w-full max-w-[48rem] flex-row">
+              <CardHeader
+                shadow={false}
+                floated={false}
+                className="m-0 w-1/12 shrink-0 rounded-r-none"
+                // className="mt-0 flex-none w-100 h-100 rounded-r-none"
+                // className='m-0 shrink h-100'
+              >
+                <GatsbyImagesProvider>
+                  {/* <div className='flex-none w-50 h-50'> */}
+                  <Image src={projects.image} alt="card-image" />
+                  {/* </div> */}
+                </GatsbyImagesProvider>
+              </CardHeader>
+              <CardBody>
+                {/* <Typography variant="h6" color="gray" className="mb-4 uppercase">
                     startups
                   </Typography> */}
-                  <Typography variant="h4" color="blue-gray" className="mb-2">
+                <Typography variant="h4" color="blue-gray" className="mb-2">
                   {projects.title}
-                  </Typography>
-                  <Typography color="gray" className="mb-8 font-normal">
+                </Typography>
+                <Typography color="gray" className="mb-8 font-normal">
                   {projects.content}
-                  </Typography>
-                  <a href={projects.readMore} className="inline-block">
-                    <Button variant="text" className="flex items-center gap-2">
-                      Learn More
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                        />
-                      </svg>
-                    </Button>
-                  </a>
-                </CardBody>
-              </Card>
-            </div>
-          ))}
+                </Typography>
+                <a href={projects.readMore} className="inline-block">
+                  <Button variant="text" className="flex items-center gap-2">
+                    Learn More
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      className="h-4 w-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </Button>
+                </a>
+              </CardBody>
+            </Card>
+          </div>
+        ))}
       </div>
     </section>
     <SplitSection
@@ -175,10 +178,9 @@ const Index = ({data}) => (
 
               <Card className="flex flex-col mt-6 w-96 h-full">
                 <CardHeader color="blue-gray" className="relative h-56">
-                 <GatsbyImagesProvider>
-                  <Image src={news.image} alt="card-image" />
-                </GatsbyImagesProvider>
-                  {/*<StaticImage src="../images/news/cheers-academic-elite-article.png" alt="Landing" />*/}
+                  <GatsbyImagesProvider>
+                    <Image src={news.image} alt="card-image" />
+                  </GatsbyImagesProvider>
 
                 </CardHeader>
                 <CardBody>
@@ -200,9 +202,73 @@ const Index = ({data}) => (
         </div>
       </div>
     </section>
+    <section id="team" className="py-20 lg:py-40">
+      <div className="container mx-auto">
+        <LabelText className="mb-8 text-gray-600 text-center">Team</LabelText>
+        <div className="grid grid-cols-3 items-stretch md:flex-row md:-mx-3">
+
+          {teamData.map(teamMember => (
+            <div key={teamMember.key} className="flex-1 px-3">
+
+
+              {/*<Card className="w-96">*/}
+              {/*  <CardHeader floated={false} className="h-80">*/}
+              {/*    <img src={teamMember.image} alt="profile-picture" />*/}
+              {/*  </CardHeader>*/}
+              {/*  <CardBody className="text-center">*/}
+              {/*    <Typography variant="h4" color="blue-gray" className="mb-2">*/}
+              {/*      {teamMember.name}*/}
+              {/*    </Typography>*/}
+              {/*    <Typography color="blue-gray" className="font-medium" textGradient>*/}
+              {/*      {teamMember.title}*/}
+              {/*    </Typography>*/}
+              {/*  </CardBody>*/}
+              {/*  <CardFooter className="flex justify-center gap-7 pt-2">*/}
+              {/*    <Tooltip content="Like">*/}
+              {/*      <Typography*/}
+              {/*        as="a"*/}
+              {/*        href="#facebook"*/}
+              {/*        variant="lead"*/}
+              {/*        color="blue"*/}
+              {/*        textGradient*/}
+              {/*      >*/}
+              {/*        <i className="fab fa-facebook" />*/}
+              {/*      </Typography>*/}
+              {/*    </Tooltip>*/}
+              {/*    <Tooltip content="Follow">*/}
+              {/*      <Typography*/}
+              {/*        as="a"*/}
+              {/*        href="#twitter"*/}
+              {/*        variant="lead"*/}
+              {/*        color="light-blue"*/}
+              {/*        textGradient*/}
+              {/*      >*/}
+              {/*        <i className="fab fa-twitter" />*/}
+              {/*      </Typography>*/}
+              {/*    </Tooltip>*/}
+              {/*    <Tooltip content="Follow">*/}
+              {/*      <Typography*/}
+              {/*        as="a"*/}
+              {/*        href="#instagram"*/}
+              {/*        variant="lead"*/}
+              {/*        color="purple"*/}
+              {/*        textGradient*/}
+              {/*      >*/}
+              {/*        <i className="fab fa-instagram" />*/}
+              {/*      </Typography>*/}
+              {/*    </Tooltip>*/}
+              {/*  </CardFooter>*/}
+              {/*</Card>*/}
+
+
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
     <section id="testimonials" className="py-20 lg:py-40">
       <div className="container mx-auto">
-      <h2 className="text-3xl lg:text-5xl font-semibold text-center">Computational Resources</h2>
+        <h2 className="text-3xl lg:text-5xl font-semibold text-center">Computational Resources</h2>
         <SplitSection
           id="services"
           primarySlot={
@@ -217,7 +283,8 @@ const Index = ({data}) => (
               <br></br>
               <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One workstation with 2x2080Ti</h2>
               <br></br>
-              <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One workstation with 1x2080Ti and 1x1080Ti</h2>
+              <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One workstation with 1x2080Ti and
+                1x1080Ti</h2>
               <br></br>
               <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One server with 2xPascal GPUs</h2>
             </div>
@@ -242,7 +309,6 @@ const Index = ({data}) => (
   </Layout>
 
 );
-
 
 
 export default Index;

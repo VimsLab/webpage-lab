@@ -1,7 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { ImagesContext } from './ImagesContext';
-const Image = ({ src, alt }) => {
+import { ImagesContext } from './ImagesContext';const Image = ({ src, alt }) => {
   const { data } = useContext(ImagesContext);
   const fluid = useMemo(
     () => data.allFile.nodes
