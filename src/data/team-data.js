@@ -19,7 +19,7 @@ export default [
     name: 'Ali Khoshsirat',
     title: 'Ph.D. Student',
     image: 'ali400.png',
-    research_areas: 'Deep Learning, Semantic Segmentation, Convolutional Networks, and Machine Learning',
+    research_areas: 'Deep Learning, Semantic Segmentation, and Machine Learning',
     email: '',
     link: 'http://www.khoshsirat.com'
   },

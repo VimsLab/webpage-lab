@@ -12,6 +12,13 @@ import SvgCharts from '../svg/SvgCharts';
 import { StaticImage } from 'gatsby-plugin-image';
 import Image from '../components/ImageComponent';
 import { GatsbyImagesProvider } from '../components/ImagesContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import { faTwitter,faFacebook,faPinterest, faGithub, faWhatsapp, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faHouse, faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-regular-svg-icons'
+library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagram, faHouse, faUser, faLinkedin)
 
 
 import {
@@ -20,8 +27,9 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Button
-  // Tooltip
+  Button,
+  Tooltip,
+  IconButton
 } from '@material-tailwind/react';
 import { graphql } from 'gatsby';
 
@@ -171,17 +179,16 @@ const Index = ({ data }) => (
     <section id="news" className="py-20 lg:py-40">
       <div className="container mx-auto">
         <LabelText className="mb-8 text-gray-600 text-center">News</LabelText>
-        <div className="grid grid-cols-3 items-stretch md:flex-row md:-mx-3">
+        <div className="grid grid-cols-3  lg:grid-cols-3 items-stretch md:flex-row md:-mx-3">
 
           {newsData.map(news => (
-            <div key={news.key} className="flex-1 px-3">
+            <div key={news.key} className="flex-1 px-3 py-3 lg:py-6">
 
-              <Card className="flex flex-col mt-6 w-96 h-full">
-                <CardHeader color="blue-gray" className="relative h-56">
+              <Card className="flex flex-col mt-6 w-80 h-full">
+                <CardHeader color="blue-gray" className="relative h-60">
                   <GatsbyImagesProvider>
                     <Image src={news.image} alt="card-image" />
                   </GatsbyImagesProvider>
-
                 </CardHeader>
                 <CardBody>
                   <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -205,60 +212,65 @@ const Index = ({ data }) => (
     <section id="team" className="py-20 lg:py-40">
       <div className="container mx-auto">
         <LabelText className="mb-8 text-gray-600 text-center">Team</LabelText>
-        <div className="grid grid-cols-3 items-stretch md:flex-row md:-mx-3">
+        <div className="grid grid-cols-4 items-stretch md:flex-row md:-mx-3">
 
           {teamData.map(teamMember => (
-            <div key={teamMember.key} className="flex-1 px-3">
+            <div key={teamMember.key} className="flex-1 px-3 py-1 lg:py-3">
 
-
-              {/*<Card className="w-96">*/}
-              {/*  <CardHeader floated={false} className="h-80">*/}
-              {/*    <img src={teamMember.image} alt="profile-picture" />*/}
-              {/*  </CardHeader>*/}
-              {/*  <CardBody className="text-center">*/}
-              {/*    <Typography variant="h4" color="blue-gray" className="mb-2">*/}
-              {/*      {teamMember.name}*/}
-              {/*    </Typography>*/}
-              {/*    <Typography color="blue-gray" className="font-medium" textGradient>*/}
-              {/*      {teamMember.title}*/}
-              {/*    </Typography>*/}
-              {/*  </CardBody>*/}
-              {/*  <CardFooter className="flex justify-center gap-7 pt-2">*/}
-              {/*    <Tooltip content="Like">*/}
-              {/*      <Typography*/}
-              {/*        as="a"*/}
-              {/*        href="#facebook"*/}
-              {/*        variant="lead"*/}
-              {/*        color="blue"*/}
-              {/*        textGradient*/}
-              {/*      >*/}
-              {/*        <i className="fab fa-facebook" />*/}
-              {/*      </Typography>*/}
-              {/*    </Tooltip>*/}
-              {/*    <Tooltip content="Follow">*/}
-              {/*      <Typography*/}
-              {/*        as="a"*/}
-              {/*        href="#twitter"*/}
-              {/*        variant="lead"*/}
-              {/*        color="light-blue"*/}
-              {/*        textGradient*/}
-              {/*      >*/}
-              {/*        <i className="fab fa-twitter" />*/}
-              {/*      </Typography>*/}
-              {/*    </Tooltip>*/}
-              {/*    <Tooltip content="Follow">*/}
-              {/*      <Typography*/}
-              {/*        as="a"*/}
-              {/*        href="#instagram"*/}
-              {/*        variant="lead"*/}
-              {/*        color="purple"*/}
-              {/*        textGradient*/}
-              {/*      >*/}
-              {/*        <i className="fab fa-instagram" />*/}
-              {/*      </Typography>*/}
-              {/*    </Tooltip>*/}
-              {/*  </CardFooter>*/}
-              {/*</Card>*/}
+              <Card className="flex flex-col mt-6 w-70 h-full">
+                <CardHeader floated={false} className="h-80">
+                  <GatsbyImagesProvider>
+                    <Image src={teamMember.image} alt="card-image" />
+                  </GatsbyImagesProvider>
+                </CardHeader>
+                <CardBody className="text-center pb-4">
+                  <Typography variant="h4" color="blue-gray" className="mb-2">
+                    {teamMember.name}
+                  </Typography>
+                  <Typography color="blue-gray" className="font-medium">
+                    {teamMember.title}
+                  </Typography>
+                  <Typography color="blue-gray" className="font-small h-8">
+                    {teamMember.research_areas}
+                  </Typography>
+                </CardBody>
+                <CardFooter className="flex justify-center gap-1 pt-4 pb-1">
+                  <Tooltip content="e-mail">
+                    <Typography
+                      as="a"
+                      href={teamMember.email}
+                      variant="lead"
+                      color="black"
+                    >
+                      <FontAwesomeIcon className='p-5' icon={faEnvelope} />
+                      <i className="fab fa-envelope" />
+                    </Typography>
+                  </Tooltip>
+                  {teamMember.linkedin && (
+                    <Tooltip content="Follow">
+                      <Typography
+                        as="a"
+                        href={teamMember.linkedin}
+                        variant="lead"
+                        color="blue"
+                      >
+                        <FontAwesomeIcon className='p-5' icon="fab fa-linkedin text-lg" />
+                      </Typography>
+                    </Tooltip>
+                  )}
+                  {teamMember.link && (
+                    <Tooltip content="Visit personal website">
+                      <Typography
+                        as="a"
+                        href={teamMember.link}
+                        variant="lead"
+                      >
+                        <FontAwesomeIcon className='p-5' icon={faGlobe} />
+                      </Typography>
+                    </Tooltip>
+                  )}
+                </CardFooter>
+              </Card>
 
 
             </div>
