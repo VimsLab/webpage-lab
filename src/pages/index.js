@@ -6,12 +6,12 @@ import SplitSection from '../components/SplitSection';
 import StatsBox from '../components/StatsBox';
 import newsData from '../data/news-data';
 import projectsData from '../data/projects-data';
-import customerData from '../data/customer-data';
-import HeroImage from '../svg/HeroImage';
 import SvgCharts from '../svg/SvgCharts';
 import { StaticImage } from "gatsby-plugin-image"
 import Image from '../components/ImageComponent'
 import { GatsbyImagesProvider } from '../components/ImagesContext'
+import journalData from '../data/Journal-paper-data'
+import publicationsData from '../data/experiment'
 
 
 import {
@@ -23,6 +23,64 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { graphql } from 'gatsby';
+
+let pubscount = 1;
+let final_count = 30;
+let max_years = 4;
+let date = new Date()
+let currentYear = date.getFullYear();
+
+const App = () => {
+  const currentYear = new Date().getFullYear();
+  const maxYear = currentYear - 3;
+
+  const filteredData = publicationsData.filter(entry => entry.year >= maxYear);
+
+  console.log(filteredData);
+
+  let categories = {};
+
+  filteredData.forEach(entry => {
+      if (entry.year !== 'year') {
+
+        if (!categories[entry.year + ' ']) {
+          categories[entry.year + ' '] = {};
+        }
+
+        if (!categories[entry.year + ' '][entry.category]) {
+          categories[entry.year + ' '][entry.category] = [];
+        }
+        // categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat(entry.text);
+        if ("link_text" in entry){
+          categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_text, entry.link_url]]);
+        } else {
+          categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, "", ""]]);
+        }
+      }
+  });
+  return (
+    <div className="App">
+      {Object.keys(categories).map(years => (
+        <div>
+          <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+          {Object.keys(categories[years]).map( categ => (
+            <div>
+            <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
+            <ul class="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
+            {/* {categories[years][categ].map(text => ( */}
+            {categories[years][categ].map((text, index) => (
+                <li id={index} className='items-center'>{text[0]} <a href={text[1]} className='text-blue-400'>{text[2]}</a> </li>
+            ))}
+            </ul>
+            </div>
+          ))}
+          </div>
+      ))}
+      <br></br><br></br>
+      <h2 className='text-1xl lg:text-2xl text-gray-500'>For full list of publications, please visit <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.</h2>
+    </div>
+  );
+};
 
 const Index = ({data}) => (
   <Layout>
@@ -54,101 +112,51 @@ const Index = ({data}) => (
         Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis, and more.
         </p>
         <br></br><br></br><br></br>
-        {projectsData.map(projects => (
-            <div key={projects.key} className="flex-1 px-3">
-              {/* <Card className="flex flex-col mt-6 w-96 h-full">
-                <CardHeader color="blue-gray" className="relative h-56"></CardHeader> */}
-              <Card className="w-full max-w-[48rem] flex-row">
-                  <CardHeader
-                    shadow={false}
-                    floated={false}
-                    className="m-0 w-1/12 shrink-0 rounded-r-none"
-                    // className="mt-0 flex-none w-100 h-100 rounded-r-none"
-                    // className='m-0 shrink h-100'
-                    >
-                    <GatsbyImagesProvider>
-                      {/* <div className='flex-none w-50 h-50'> */}
-                      <Image src={projects.image} alt="card-image" />
-                      {/* </div> */}
-                    </GatsbyImagesProvider>
+          <div className="flex flex-wrap content-center">
+            {projectsData.map(projects => (
+              // <div key={projects.key} className="flex-auto">
+              <div key={projects.key} className='mr-4 mb-5'>
+                {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
+                {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
+                {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
+                <Card className='card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200'>
+                  <CardHeader floated={false} color="blue-gray">
+                      <GatsbyImagesProvider>
+                        <Image src={projects.image} alt="card-image" />
+                      </GatsbyImagesProvider>
                   </CardHeader>
-                <CardBody>
-                  {/* <Typography variant="h6" color="gray" className="mb-4 uppercase">
-                    startups
-                  </Typography> */}
-                  <Typography variant="h4" color="blue-gray" className="mb-2">
-                  {projects.title}
-                  </Typography>
-                  <Typography color="gray" className="mb-8 font-normal">
-                  {projects.content}
-                  </Typography>
-                  <a href={projects.readMore} className="inline-block">
-                    <Button variant="text" className="flex items-center gap-2">
-                      Learn More
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                        />
-                      </svg>
-                    </Button>
-                  </a>
-                </CardBody>
-              </Card>
+                  <CardBody>
+                    <div className="mb-3 flex justify-center size-auto">
+                      <Typography variant="h5" color="blue-gray">
+                        <span class='inline-block'>{projects.title}</span>
+                        
+                      </Typography>
+                    </div>
+                    <Typography color="gray">
+                      {projects.content}
+                    </Typography>
+                  </CardBody>
+                  <CardFooter className="pt-3">
+                    <a href={projects.readMore} className="inline-block">
+                      <Button size="sm" fullWidth={true}>
+                        Learn More
+                      </Button>
+                    </a>
+                  </CardFooter>
+                </Card>
             </div>
-          ))}
+            ))}
+          </div>
+        {/* </div> */}
       </div>
     </section>
-    <SplitSection
-      id="services"
-      primarySlot={
-        <div className="lg:pr-32 xl:pr-48">
-          <h3 className="text-3xl font-semibold leading-tight">Market Analysis</h3>
-          <p className="mt-8 text-xl font-light leading-relaxed">
-            Our team of enthusiastic marketers will analyse and evaluate how your company stacks
-            against the closest competitors
-          </p>
-        </div>
-      }
-      secondarySlot={<SvgCharts />}
-    />
-    <SplitSection
-      reverseOrder
-      primarySlot={
-        <div className="lg:pl-32 xl:pl-48">
-          <h3 className="text-3xl font-semibold leading-tight">
-            Design And Plan Your Business Growth Steps
-          </h3>
-          <p className="mt-8 text-xl font-light leading-relaxed">
-            Once the market analysis process is completed our staff will search for opportunities
-            that are in reach
-          </p>
-        </div>
-      }
-      secondarySlot={<SvgCharts />}
-    />
-    <SplitSection
-      primarySlot={
-        <div className="lg:pr-32 xl:pr-48">
-          <h3 className="text-3xl font-semibold leading-tight">
-            Search For Performance Optimization
-          </h3>
-          <p className="mt-8 text-xl font-light leading-relaxed">
-            With all the information in place you will be presented with an action plan that your
-            company needs to follow
-          </p>
-        </div>
-      }
-      secondarySlot={<SvgCharts />}
-    />
+    <section id='publications'>
+      <div className="container mx-auto items-stretch">
+        <h2 className="text-3xl lg:text-5xl text-center font-semibold pb-8">Publications</h2>
+        {App()}
+      </div>
+    </section>
+
     <section id="stats" className="py-20 lg:pt-32">
       <div className="container mx-auto text-center">
         <LabelText className="text-gray-600">Our customers get results</LabelText>
