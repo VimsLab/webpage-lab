@@ -1,17 +1,12 @@
 import React from 'react';
-import CustomerCard from '../components/CustomerCard';
 import LabelText from '../components/LabelText';
 import Layout from '../components/layout/Layout';
 import SplitSection from '../components/SplitSection';
-import StatsBox from '../components/StatsBox';
 import newsData from '../data/news-data';
 import projectsData from '../data/projects-data';
-import journalData from '../data/Journal-paper-data';
 import publicationsData from '../data/experiment';
 import teamData from '../data/team-data';
 import photosData from '../data/photos-data';
-import HeroImage from '../svg/HeroImage';
-import SvgCharts from '../svg/SvgCharts';
 import { StaticImage } from 'gatsby-plugin-image';
 import Image from '../components/ImageComponent';
 import { GatsbyImagesProvider } from '../components/ImagesContext';
@@ -21,30 +16,20 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 import {
-  faTwitter,
   faFacebook,
-  faPinterest,
   faGithub,
-  faWhatsapp,
   faInstagram,
-  faLinkedin
+  faLinkedin,
+  faPinterest,
+  faTwitter,
+  faWhatsapp
 } from '@fortawesome/free-brands-svg-icons';
-import { faHouse, faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { Button, Card, CardBody, CardFooter, CardHeader, Tooltip, Typography } from '@material-tailwind/react';
 
 library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagram, faHouse, faUser, faLinkedin);
 
-
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-  Tooltip
-} from '@material-tailwind/react';
-import { graphql } from 'gatsby';
 
 let pubscount = 1;
 let final_count = 30;
@@ -148,10 +133,12 @@ const Index = ({ data, deviceType }) => {
       </section>
       <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl lg:text-5xl font-semibold">Projects</h2>
+          <LabelText className="mb-8 text-gray-600 text-center">Projects</LabelText>
           <p className='mt-4'>
-            There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the following research areas:
-            Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis, and more.
+            There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the
+            following research areas:
+            Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis,
+            and more.
           </p>
           <br></br><br></br><br></br>
           <div className="flex flex-wrap content-center">
@@ -161,7 +148,8 @@ const Index = ({ data, deviceType }) => {
                 {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
                 {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
                 {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
-                <Card className='card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200'>
+                <Card
+                  className='card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200'>
                   <CardHeader floated={false} color="blue-gray">
                     <GatsbyImagesProvider>
                       <Image src={projects.image} alt="card-image" />
@@ -194,7 +182,7 @@ const Index = ({ data, deviceType }) => {
 
       <section id='publications'>
         <div className="container mx-auto items-stretch">
-          <h2 className="text-3xl lg:text-5xl text-center font-semibold pb-8">Publications</h2>
+          <LabelText className="mb-8 text-gray-600 text-center">Publications</LabelText>
           {App()}
         </div>
       </section>
@@ -239,7 +227,6 @@ const Index = ({ data, deviceType }) => {
 
             {teamData.map(teamMember => (
               <div key={teamMember.key} className="flex-1 px-3 py-1 lg:py-3">
-
                 <Card className="flex flex-col mt-6 w-70 h-full">
                   <CardHeader floated={false} className="">
                     <GatsbyImagesProvider>
@@ -258,17 +245,19 @@ const Index = ({ data, deviceType }) => {
                     </Typography>
                   </CardBody>
                   <CardFooter className="flex justify-center gap-1 pt-4 pb-1">
-                    <Tooltip content="e-mail">
-                      <Typography
-                        as="a"
-                        href={teamMember.email}
-                        variant="lead"
-                        color="black"
-                      >
-                        <FontAwesomeIcon className="p-5" icon={faEnvelope} />
-                        <i className="fab fa-envelope" />
-                      </Typography>
-                    </Tooltip>
+                    {teamMember.email && (
+                      <Tooltip content={`e-mail: ${teamMember.email}`}>
+                        <Typography
+                          as="a"
+                          href={`mailto:${teamMember.email}`}
+                          variant="lead"
+                          color="black"
+                        >
+                          <FontAwesomeIcon className="p-5" icon={faEnvelope} />
+                          <i className="fab fa-envelope" />
+                        </Typography>
+                      </Tooltip>
+                    )}
                     {teamMember.linkedin && (
                       <Tooltip content="Follow">
                         <Typography
@@ -302,7 +291,6 @@ const Index = ({ data, deviceType }) => {
       <section id="photos" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Photos</LabelText>
-          {/*<div className="grid grid-cols-3  lg:grid-cols-3 items-stretch md:flex-row md:-mx-3">*/}
           <Carousel
             swipeable={false}
             draggable={false}
@@ -337,13 +325,11 @@ const Index = ({ data, deviceType }) => {
       </section>
       <section id="testimonials" className="py-20 lg:py-40">
         <div className="container mx-auto">
-          <h2 className="text-3xl lg:text-5xl font-semibold text-center">Computational Resources</h2>
+          <LabelText className="mb-8 text-gray-600 text-center">Computational Resources</LabelText>
           <SplitSection
             id="services"
             primarySlot={
               <div className="lg:pr-32 xl:pr-48">
-                {/* <h4 className="text-3xl font-semibold text-center">Computational Resources</h4> */}
-                {/* <br></br> */}
                 <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">Two servers with 4xA6000 each</h2>
                 <br></br>
                 <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">Two workstations with 2x3090 each</h2>
