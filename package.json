@@ -21,6 +21,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.1",
     "@material-tailwind/react": "^2.1.9",
+    "@types/react": "^18.0.26",
     "autoprefixer": "^10.4.0",
     "fs-extra": "^11.2.0",
     "gatsby": "^4.23.0",
@@ -33,10 +34,11 @@
     "gatsby-theme-codebushi": "github:bingalls/gatsby-theme-codebushi",
     "gatsby-transformer-sharp": "4.25.0",
     "postcss": "^8.3.8",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-multi-carousel": "^2.8.5",
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {

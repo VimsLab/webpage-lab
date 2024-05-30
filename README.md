@@ -23,10 +23,6 @@ In your terminal:
 - Add the `favicon.ico` into the `public` folder. This is to show an icon for tabs.
 - You can give `public` folder any name of your choice, but let's say we keep the name `public`. Compress this folder. Go to GoDaddy File Manager in the `public_html` section. If you notice there is another folder with the same name, please change the name of the current one. This is only for security reasons in case the new version does not work. Upload your compressed folder and extract it. Now you should be able to see the webpage if you access https://bigdatavision.org/public/
 
-## Notes
 
-These libraries do not yet fully support the upgrade to Gatsby 3.x:
-* gatsby-plugin-react-helmet
-* gatsby-plugin-emotion
-* gatsby-plugin-postcss
-* gatsby-theme-codebushi
+## Notes for developers
+- Every time you modify a file that is outside `src` folder, you will not see your changes on the dev site until you do not kill and restart the service.

@@ -6,7 +6,7 @@ import {Helmet} from "react-helmet";
 import favicon from '../../images/logo-only.png'
 
 const Header = () => (
-  <header className="sticky top-0 bg-white shadow">
+  <header className="sticky top-0 bg-white shadow" style={{backgroundColor: "#f8cd05", zIndex: 30}}>
     <Helmet>
       <meta charSet="utf-8" />
       <title>Big Data Vision - VIMS Lab @ University of Delaware</title>
@@ -26,19 +26,22 @@ const Header = () => (
         <AnchorLink className="px-4" href="#services">
           Publications
         </AnchorLink>
-        <AnchorLink className="px-4" href="#stats">
-          People
-        </AnchorLink>
         <AnchorLink className="px-4" href="#news">
           News
+        </AnchorLink>
+        <AnchorLink className="px-4" href="#team">
+          Team
+        </AnchorLink>
+        <AnchorLink className="px-4" href="#photos">
+          Photos
         </AnchorLink>
         <AnchorLink className="px-4" href="#testimonials">
           Resources
         </AnchorLink>
       </div>
-      <div className="hidden md:block">
-        <Button className="text-sm">Contact</Button>
-      </div>
+        <a href="mailto:vims@cis.udel.edu">
+          <Button>Contact</Button>
+        </a>
     </div>
   </header>
 );
