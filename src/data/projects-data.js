@@ -9,7 +9,7 @@ export default [
   {
     key: 2,
     title: 'HUMAN HEALTH',
-    content: 'Use of Machine Learning techniques for Human Health.',
+    content: 'Use of Machine Learning techniques for precision medicine.',
     image: 'health-icon.png',
     readMore: 'https://bigdatavision.org/humanhealth/'
   },

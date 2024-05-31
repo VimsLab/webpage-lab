@@ -34,7 +34,7 @@ library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagra
 let pubscount = 1;
 let final_count = 30;
 let max_years = 4;
-let date = new Date()
+let date = new Date();
 let currentYear = date.getFullYear();
 
 const App = () => {
@@ -58,10 +58,10 @@ const App = () => {
         categories[entry.year + ' '][entry.category] = [];
       }
       // categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat(entry.text);
-      if ("link_text" in entry){
+      if ('link_text' in entry) {
         categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_text, entry.link_url]]);
       } else {
-        categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, "", ""]]);
+        categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
       }
     }
   });
@@ -70,13 +70,14 @@ const App = () => {
       {Object.keys(categories).map(years => (
         <div>
           <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
-          {Object.keys(categories[years]).map( categ => (
+          {Object.keys(categories[years]).map(categ => (
             <div>
               <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
               <ul class="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
                 {/* {categories[years][categ].map(text => ( */}
                 {categories[years][categ].map((text, index) => (
-                  <li id={index} className='items-center'>{text[0]} <a href={text[1]} className='text-blue-400'>{text[2]}</a> </li>
+                  <li id={index} className="items-center">{text[0]} <a href={text[1]}
+                                                                       className="text-blue-400">{text[2]}</a></li>
                 ))}
               </ul>
             </div>
@@ -84,7 +85,8 @@ const App = () => {
         </div>
       ))}
       <br></br><br></br>
-      <h2 className='text-1xl lg:text-2xl text-gray-500'>For full list of publications, please visit <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.</h2>
+      <h2 className="text-1xl lg:text-2xl text-gray-500">For full list of publications, please visit <a
+        href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.</h2>
     </div>
   );
 };
@@ -114,7 +116,7 @@ const Index = ({ data, deviceType }) => {
         <div className="container mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
-              Transforming Big Data into Reality: Your Vision, Our Mission
+              Fundamental Discoveries, Transformative Applications
             </h1>
             <p className="text-xl lg:text-2xl mt-6 font-light">
               Discover VIMS Lab @ University of Delaware
@@ -134,7 +136,7 @@ const Index = ({ data, deviceType }) => {
       <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
         <div className="container mx-auto text-center">
           <LabelText className="mb-8 text-gray-600 text-center">Projects</LabelText>
-          <p className='mt-4'>
+          <p className="mt-4">
             There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the
             following research areas:
             Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis,
@@ -144,12 +146,12 @@ const Index = ({ data, deviceType }) => {
           <div className="flex flex-wrap content-center">
             {projectsData.map(projects => (
               // <div key={projects.key} className="flex-auto">
-              <div key={projects.key} className='mr-4 mb-5'>
+              <div key={projects.key} className="mr-4 mb-5">
                 {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
                 {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
                 {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
                 <Card
-                  className='card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200'>
+                  className="card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200">
                   <CardHeader floated={false} color="blue-gray">
                     <GatsbyImagesProvider>
                       <Image src={projects.image} alt="card-image" />
@@ -158,7 +160,7 @@ const Index = ({ data, deviceType }) => {
                   <CardBody>
                     <div className="mb-3 flex justify-center size-auto">
                       <Typography variant="h5" color="blue-gray">
-                        <span class='inline-block'>{projects.title}</span>
+                        <span class="inline-block">{projects.title}</span>
 
                       </Typography>
                     </div>
@@ -180,7 +182,7 @@ const Index = ({ data, deviceType }) => {
         </div>
       </section>
 
-      <section id='publications'>
+      <section id="publications">
         <div className="container mx-auto items-stretch">
           <LabelText className="mb-8 text-gray-600 text-center">Publications</LabelText>
           {App()}
@@ -286,8 +288,16 @@ const Index = ({ data, deviceType }) => {
               </div>
             ))}
           </div>
+          <div className="container mx-auto px-8 lg:flex justify-center">
+            <p className="mt-8 md:mt-12">
+              <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/People">
+                <Button size="lg">Alumni</Button>
+              </a>
+            </p>
+          </div>
         </div>
       </section>
+
       <section id="photos" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Photos</LabelText>
@@ -323,6 +333,7 @@ const Index = ({ data, deviceType }) => {
           </Carousel>
         </div>
       </section>
+
       <section id="testimonials" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Computational Resources</LabelText>
@@ -363,7 +374,6 @@ const Index = ({ data, deviceType }) => {
           <a href="mailto:vims@cis.udel.edu">
             <Button size="xl">Contact</Button>
           </a>
-
         </p>
       </section>
     </Layout>

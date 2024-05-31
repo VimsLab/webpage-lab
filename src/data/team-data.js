@@ -12,16 +12,7 @@ export default [
     title: 'Associate Scientist',
     image: 'phil400.png',
     research_areas: 'Multimodal Stereo Vision, Augmented and Virtual Reality, and Machine Learning',
-    email: ''
-  },
-  {
-    key: 'khoshsirat',
-    name: 'Ali Khoshsirat',
-    title: 'Ph.D. Student',
-    image: 'ali400.png',
-    research_areas: 'Deep Learning, Semantic Segmentation, and Machine Learning',
-    email: '',
-    link: 'http://www.khoshsirat.com'
+    email: 'saponaro@udel.edu'
   },
   {
     key: 'bhattarai',
@@ -67,7 +58,7 @@ export default [
     key: 'martin',
     name: 'Daniela Martin',
     title: 'Ph.D. Student',
-    image: 'daniela.jpg',
+    image: 'daniela.jpeg',
     research_areas: 'Deep Learning, Computer Vision, Remote Sensing and Astrophysics',
     email: 'dmartinv@udel.edu'
   },
@@ -86,5 +77,21 @@ export default [
     image: 'dara.jpg',
     research_areas: 'Deep Learning and Computer Vision',
     email: 'mcnally@udel.edu'
+  },
+  {
+    key: 'odonnell',
+    name: 'Kyle O\'Donnell',
+    title: 'Ph.D. Student',
+    image: 'kyle.jpg',
+    research_areas: 'Deep Learning, Computer Vision, and Edge AI Deployment',
+    email: 'kpod@udel.edu'
+  },
+  {
+    key: 'ankevar',
+    name: 'Tejas Anvekar',
+    title: 'Ph.D. Student',
+    image: 'no-photo.png',
+    research_areas: 'Deep Learning and Computer Vision',
+    email: 'tanvekar@udel.edu'
   }
 ];
