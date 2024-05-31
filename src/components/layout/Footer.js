@@ -14,7 +14,6 @@ library.add(faXTwitter, faYoutube);
 const Footer = () => (
   <footer style={{ backgroundColor: '#f8cd05' }}>
     <div className="container mx-auto py-16 px-3 mt-48 mb-8 text-gray-800">
-      <div className="flex -mx-3"></div>
       <div className="flex -mx-3">
         <div className="flex-1 px-3">
           <h2 className="text-lg font-semibold">About Us</h2>
@@ -72,6 +71,7 @@ const Footer = () => (
         </div>
       </div>
     </div>
+
 
   </footer>
 );

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LabelText from '../components/LabelText';
 import Layout from '../components/layout/Layout';
 import SplitSection from '../components/SplitSection';
 import newsData from '../data/news-data';
 import projectsData from '../data/projects-data';
-import publicationsData from '../data/experiment';
 import teamData from '../data/team-data';
 import photosData from '../data/photos-data';
 import { StaticImage } from 'gatsby-plugin-image';
@@ -31,62 +30,98 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Tooltip, Typography } f
 library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagram, faHouse, faUser, faLinkedin);
 
 
-let pubscount = 1;
-let final_count = 30;
-let max_years = 4;
-let date = new Date();
-let currentYear = date.getFullYear();
+let max_years = 3;
+const pubsFileURL = 'https://raw.githubusercontent.com/VimsLab/vims-publications-list/main/publications-list.js';
 
-const App = () => {
-  const currentYear = new Date().getFullYear();
-  const maxYear = currentYear - 3;
+const fetchAndProcessJsFile = async (url, setData, maxYear) => {
+  const xhr = new XMLHttpRequest();
 
-  const filteredData = publicationsData.filter(entry => entry.year >= maxYear);
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        const jsContent = xhr.responseText;
 
-  console.log(filteredData);
+        const match = jsContent.match(/export\s+default\s+(\[.*\]);/s);
+        if (match) {
+          const data = match[1];
+          try {
+            const parsedData = JSON.parse(data);
 
-  let categories = {};
-
-  filteredData.forEach(entry => {
-    if (entry.year !== 'year') {
-
-      if (!categories[entry.year + ' ']) {
-        categories[entry.year + ' '] = {};
-      }
-
-      if (!categories[entry.year + ' '][entry.category]) {
-        categories[entry.year + ' '][entry.category] = [];
-      }
-      // categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat(entry.text);
-      if ('link_text' in entry) {
-        categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_text, entry.link_url]]);
+            const filteredData = parsedData.filter(entry => parseInt(entry.year, 10) >= maxYear);
+            setData(filteredData);
+          } catch (error) {
+            console.error('Error parsing JSON data:', error);
+          }
+        } else {
+          console.error('Failed to extract data from the .js file');
+        }
       } else {
-        categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
+        console.error('Error fetching the .js file:', xhr.statusText);
       }
     }
-  });
+  };
+
+  xhr.send();
+};
+
+const App = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [categories, setCategories] = useState({});
+  const currentYear = new Date().getFullYear();
+  const maxYear = currentYear - max_years;
+
+  useEffect(() => {
+    fetchAndProcessJsFile(pubsFileURL, setFilteredData, maxYear);
+  }, [maxYear]);
+
+  useEffect(() => {
+    const updatedCategories = {};
+
+    filteredData.forEach(entry => {
+      if (entry.year !== 'year') {
+        if (!updatedCategories[entry.year + ' ']) {
+          updatedCategories[entry.year + ' '] = {};
+        }
+
+        if (!updatedCategories[entry.year + ' '][entry.category]) {
+          updatedCategories[entry.year + ' '][entry.category] = [];
+        }
+
+        if ('link_text' in entry) {
+          updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_url, entry.link_text]]);
+        } else {
+          updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
+        }
+      }
+    });
+
+    setCategories(updatedCategories);
+  }, [filteredData]);
+
   return (
     <div className="App">
       {Object.keys(categories).map(years => (
-        <div>
-          <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+        <div key={years}>
+          <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
           {Object.keys(categories[years]).map(categ => (
-            <div>
-              <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
-              <ul class="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
-                {/* {categories[years][categ].map(text => ( */}
+            <div key={categ}>
+              <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
+              <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
                 {categories[years][categ].map((text, index) => (
-                  <li id={index} className="items-center">{text[0]} <a href={text[1]}
-                                                                       className="text-blue-400">{text[2]}</a></li>
+                  <li key={index} className="items-center">{text[0]} <a href={text[1]}
+                                                                        className="text-blue-400">{text[2]}</a></li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
       ))}
-      <br></br><br></br>
-      <h2 className="text-1xl lg:text-2xl text-gray-500">For full list of publications, please visit <a
-        href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.</h2>
+      <br /><br />
+      <h2 className="text-1xl lg:text-2xl text-gray-500">
+        For full list of publications, please visit <a
+        href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js"><u>this</u></a> page.
+      </h2>
     </div>
   );
 };
@@ -185,6 +220,7 @@ const Index = ({ data, deviceType }) => {
       <section id="publications">
         <div className="container mx-auto items-stretch">
           <LabelText className="mb-8 text-gray-600 text-center">Publications</LabelText>
+          {/* To add new publications, go to the vims-publications-list repository in VIMS lab GitHub */}
           {App()}
         </div>
       </section>
