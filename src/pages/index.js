@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import CustomerCard from '../components/CustomerCard';
 import LabelText from '../components/LabelText';
 import Layout from '../components/layout/Layout';
@@ -23,35 +24,28 @@ import {
 import { graphql } from 'gatsby';
 
 let max_years = 3;
-let date = new Date()
-let currentYear = date.getFullYear();
-let filteredData = '';
-const maxYear = currentYear - max_years;
-
 const pubsFileURL = 'https://raw.githubusercontent.com/VimsLab/vims-publications-list/main/publications-list.js';
 
-function fetchAndProcessJsFile(url) {
+const fetchAndProcessJsFile = async (url, setData, maxYear) => {
   const xhr = new XMLHttpRequest();
-  
+
   xhr.open('GET', url, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         const jsContent = xhr.responseText;
 
-        // Process the content (e.g., extract the export default data)
         const match = jsContent.match(/export\s+default\s+(\[.*\]);/s);
         if (match) {
           const data = match[1];
-          
-          // Parse the data as JSON (if it's a valid JSON array)
-          const parsedData = JSON.parse(data);
-          console.log('Parsed data:', parsedData);
+          try {
+            const parsedData = JSON.parse(data);
 
-          filteredData = parsedData.filter(entry => entry.year >= maxYear);
-          console.log('Filtered data:', filteredData);
-          
-          // Further processing of parsedData if needed
+            const filteredData = parsedData.filter(entry => parseInt(entry.year, 10) >= maxYear);
+            setData(filteredData);
+          } catch (error) {
+            console.error('Error parsing JSON data:', error);
+          }
         } else {
           console.error('Failed to extract data from the .js file');
         }
@@ -60,58 +54,70 @@ function fetchAndProcessJsFile(url) {
       }
     }
   };
-  
-  xhr.send();
-}
 
-// Run the function
-fetchAndProcessJsFile(pubsFileURL);
+  xhr.send();
+};
 
 const App = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [categories, setCategories] = useState({});
+  const currentYear = new Date().getFullYear();
+  const maxYear = currentYear - max_years;
 
-  let categories = {};
+  useEffect(() => {
+    fetchAndProcessJsFile(pubsFileURL, setFilteredData, maxYear);
+  }, [maxYear]);
 
-  filteredData.forEach(entry => {
+  useEffect(() => {
+    const updatedCategories = {};
+
+    filteredData.forEach(entry => {
       if (entry.year !== 'year') {
-
-        if (!categories[entry.year + ' ']) {
-          categories[entry.year + ' '] = {};
+        if (!updatedCategories[entry.year + ' ']) {
+          updatedCategories[entry.year + ' '] = {};
         }
 
-        if (!categories[entry.year + ' '][entry.category]) {
-          categories[entry.year + ' '][entry.category] = [];
+        if (!updatedCategories[entry.year + ' '][entry.category]) {
+          updatedCategories[entry.year + ' '][entry.category] = [];
         }
-        // categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat(entry.text);
-        if ("link_text" in entry){
-          categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_text, entry.link_url]]);
+
+        if ('link_text' in entry) {
+          updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_url, entry.link_text]]);
         } else {
-          categories[entry.year + ' '][entry.category] = categories[entry.year + ' '][entry.category].concat([[entry.text, "", ""]]);
+          updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
         }
       }
-  });
+    });
+
+    setCategories(updatedCategories);
+  }, [filteredData]);
+
   return (
     <div className="App">
       {Object.keys(categories).map(years => (
-        <div>
-          <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
-          {Object.keys(categories[years]).map( categ => (
-            <div>
-            <h3 class="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
-            <ul class="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
-            {/* {categories[years][categ].map(text => ( */}
-            {categories[years][categ].map((text, index) => (
-                <li id={index} className='items-center'>{text[0]} <a href={text[1]} className='text-blue-400'>{text[2]}</a> </li>
-            ))}
-            </ul>
+        <div key={years}>
+          <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+          {Object.keys(categories[years]).map(categ => (
+            <div key={categ}>
+              <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
+              <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
+                {categories[years][categ].map((text, index) => (
+                  <li key={index} className='items-center'>{text[0]} <a href={text[1]} className='text-blue-400'>{text[2]}</a></li>
+                ))}
+              </ul>
             </div>
           ))}
-          </div>
+        </div>
       ))}
-      <br></br><br></br>
-      <h2 className='text-1xl lg:text-2xl text-gray-500'>For full list of publications, please visit <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.</h2>
+      <br /><br />
+      <h2 className='text-1xl lg:text-2xl text-gray-500'>
+        For full list of publications, please visit <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/Publications"><u>this</u></a> page.
+      </h2>
     </div>
   );
 };
+
+// export default App;
 
 const Index = ({data}) => (
   <Layout>
