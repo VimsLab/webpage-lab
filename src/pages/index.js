@@ -10,8 +10,6 @@ import SvgCharts from '../svg/SvgCharts';
 import { StaticImage } from "gatsby-plugin-image"
 import Image from '../components/ImageComponent'
 import { GatsbyImagesProvider } from '../components/ImagesContext'
-import journalData from '../data/Journal-paper-data'
-import publicationsData from '../data/experiment'
 
 
 import {
@@ -24,19 +22,52 @@ import {
 } from "@material-tailwind/react";
 import { graphql } from 'gatsby';
 
-let pubscount = 1;
-let final_count = 30;
-let max_years = 4;
+let max_years = 3;
 let date = new Date()
 let currentYear = date.getFullYear();
+let filteredData = '';
+const maxYear = currentYear - max_years;
+
+const pubsFileURL = 'https://raw.githubusercontent.com/VimsLab/vims-publications-list/main/publications-list.js';
+
+function fetchAndProcessJsFile(url) {
+  const xhr = new XMLHttpRequest();
+  
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        const jsContent = xhr.responseText;
+
+        // Process the content (e.g., extract the export default data)
+        const match = jsContent.match(/export\s+default\s+(\[.*\]);/s);
+        if (match) {
+          const data = match[1];
+          
+          // Parse the data as JSON (if it's a valid JSON array)
+          const parsedData = JSON.parse(data);
+          console.log('Parsed data:', parsedData);
+
+          filteredData = parsedData.filter(entry => entry.year >= maxYear);
+          console.log('Filtered data:', filteredData);
+          
+          // Further processing of parsedData if needed
+        } else {
+          console.error('Failed to extract data from the .js file');
+        }
+      } else {
+        console.error('Error fetching the .js file:', xhr.statusText);
+      }
+    }
+  };
+  
+  xhr.send();
+}
+
+// Run the function
+fetchAndProcessJsFile(pubsFileURL);
 
 const App = () => {
-  const currentYear = new Date().getFullYear();
-  const maxYear = currentYear - 3;
-
-  const filteredData = publicationsData.filter(entry => entry.year >= maxYear);
-
-  console.log(filteredData);
 
   let categories = {};
 
