@@ -1,14 +1,19 @@
 export default [
   // Most recent goes first
   {
-    key: 8,
+    key: 9,
     title: 'With Dr Bajcsy at Franklin Awards Dinner 2024',
     image: '2024-franklin-awards.jpeg'
   },
   {
-    key: 7,
+    key: 8,
     title: 'ARL Project Kickoff. Jan, 2024',
     image: '202401-ARL_UDelKickoff_GroupPicsai.jpeg'
+  },
+  {
+    key: 7,
+    title: 'With Yann LeCun at MICCAI 2023',
+    image: '2023-miccai-lecun.jpeg'
   },
   {
     key: 6,

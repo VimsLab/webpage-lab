@@ -100,28 +100,33 @@ const App = () => {
   }, [filteredData]);
 
   return (
-    <div className="App">
+    <div className="App ml-5 mr-5">
       {Object.keys(categories).map(years => (
         <div key={years}>
-          <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+          <Typography variant="h5" color="blue-gray" className="mb-1 mt-1">
+            {years}
+          </Typography>
           {Object.keys(categories[years]).map(categ => (
             <div key={categ}>
-              <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
-              <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
-                {categories[years][categ].map((text, index) => (
-                  <li key={index} className="items-center">{text[0]} <a href={text[1]}
-                                                                        className="text-blue-400">{text[2]}</a></li>
-                ))}
-              </ul>
+              <Typography variant="h6" color="blue-gray" className="mt-2">
+                {categ}
+              </Typography>
+              {categories[years][categ].map((text, index) => (
+                <Typography key={index} className="items-center font-light">- {text[0]}
+                  <a href={text[2]} className="text-blue-400">{text[1]}</a>
+                </Typography>
+              ))}
             </div>
           ))}
         </div>
       ))}
-      <br /><br />
-      <h2 className="text-1xl lg:text-2xl text-gray-500">
-        For full list of publications, please visit <a
-        href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js"><u>this</u></a> page.
-      </h2>
+      <div className="container mx-auto px-8 lg:flex justify-center">
+        <p className="mt-8 md:mt-12">
+          <a href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js">
+            <Button size="lg">Full list of publications</Button>
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
@@ -147,7 +152,7 @@ const responsive = {
 const Index = ({ data, deviceType }) => {
   return (
     <Layout>
-      <section className="pt-20 md:pt-40">
+      <section id="landing" className="pt-20 md:pt-40">
         <div className="container mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
@@ -169,52 +174,46 @@ const Index = ({ data, deviceType }) => {
         </div>
       </section>
       <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Projects</LabelText>
-          <p className="mt-4">
+          <p className="mt-4 ml-4 mr-4">
             There are many ongoing and supported research projects in the VIMS lab. Currently, work is being done in the
             following research areas:
             Stereo Vision, Machine Learning, Image Processing, Virtual Reality, Data Mining, Biomedical Image Analysis,
             and more.
           </p>
           <br></br><br></br><br></br>
-          <div className="flex flex-wrap content-center">
-            {projectsData.map(projects => (
-              // <div key={projects.key} className="flex-auto">
-              <div key={projects.key} className="mr-4 mb-5">
-                {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
-                {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
-                {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
-                <Card
-                  className="card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200">
-                  <CardHeader floated={false} color="blue-gray">
-                    <GatsbyImagesProvider>
-                      <Image src={projects.image} alt="card-image" />
-                    </GatsbyImagesProvider>
-                  </CardHeader>
-                  <CardBody>
-                    <div className="mb-3 flex justify-center size-auto">
-                      <Typography variant="h5" color="blue-gray">
-                        <span class="inline-block">{projects.title}</span>
-
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-stretch md:flex-row md:-mx-3">
+              {projectsData.map(projects => (
+                <div key={projects.key} className="flex-1 px-3 py-3 lg:py-6">
+                  <Card className="flex flex-col mt-6 w-70 h-full">
+                    <CardHeader floated={false} color="blue-gray">
+                      <GatsbyImagesProvider>
+                        <Image src={projects.image} alt="card-image" />
+                      </GatsbyImagesProvider>
+                    </CardHeader>
+                    <CardBody>
+                      <div className="mb-3 flex justify-center size-auto">
+                        <Typography variant="h5" color="blue-gray">
+                          <span class="inline-block">{projects.title}</span>
+                        </Typography>
+                      </div>
+                      <Typography color="gray">
+                        {projects.content}
                       </Typography>
-                    </div>
-                    <Typography color="gray">
-                      {projects.content}
-                    </Typography>
-                  </CardBody>
-                  <CardFooter className="pt-3">
-                    <a href={projects.readMore} className="inline-block">
-                      <Button size="sm" fullWidth={true}>
-                        Learn More
-                      </Button>
-                    </a>
-                  </CardFooter>
-                </Card>
-              </div>
-            ))}
+                    </CardBody>
+                    <CardFooter className="pt-3">
+                      <a href={projects.readMore} className="inline-block">
+                        <Button size="sm" fullWidth={true}>
+                          Learn More
+                        </Button>
+                      </a>
+                    </CardFooter>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
       </section>
 
       <section id="publications">
@@ -228,7 +227,7 @@ const Index = ({ data, deviceType }) => {
       <section id="news" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">News</LabelText>
-          <div className="grid grid-cols-3  lg:grid-cols-3 items-stretch md:flex-row md:-mx-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch md:flex-row md:-mx-3">
 
             {newsData.map(news => (
               <div key={news.key} className="flex-1 px-3 py-3 lg:py-6">
@@ -261,7 +260,7 @@ const Index = ({ data, deviceType }) => {
       <section id="team" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Team</LabelText>
-          <div className="grid grid-cols-4 items-stretch md:flex-row md:-mx-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch md:flex-row md:-mx-3">
 
             {teamData.map(teamMember => (
               <div key={teamMember.key} className="flex-1 px-3 py-1 lg:py-3">
@@ -370,7 +369,7 @@ const Index = ({ data, deviceType }) => {
         </div>
       </section>
 
-      <section id="testimonials" className="py-20 lg:py-40">
+      <section id="resources" className="py-20 lg:py-40">
         <div className="container mx-auto">
           <LabelText className="mb-8 text-gray-600 text-center">Computational Resources</LabelText>
           <SplitSection
@@ -400,7 +399,7 @@ const Index = ({ data, deviceType }) => {
           />
         </div>
       </section>
-      <section className="container mx-auto my-20 py-24 bg-gray-200 rounded-lg text-center">
+      <section id="final" className="container mx-auto my-20 py-24 bg-gray-200 rounded-lg text-center">
         <h3 className="text-5xl font-semibold">Join us in advancing computer vision</h3>
         <p className="mt-8 text-xl font-light ml-20 mr-20">
           Our lab is at the forefront of advancing computer vision through deep learning. Get involved and help us
