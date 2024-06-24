@@ -13,6 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import full_publications from './fullPublications';
+import { BrowserRouter as Router, Route, Routes, Link, BrowserRouter } from 'react-router-dom';
+import Navigation from './navigation';
+import ReactDOM from 'react-dom';
 
 import {
   faFacebook,
@@ -100,28 +104,38 @@ const App = () => {
   }, [filteredData]);
 
   return (
-    <div className="App">
+    <div className="App ml-5 mr-5">
       {Object.keys(categories).map(years => (
         <div key={years}>
-          <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+          <Typography variant="h5" color="blue-gray" className="mb-1 mt-1">
+            {years}
+          </Typography>
           {Object.keys(categories[years]).map(categ => (
             <div key={categ}>
-              <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
-              <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
-                {categories[years][categ].map((text, index) => (
-                  <li key={index} className="items-center">{text[0]} <a href={text[1]}
-                                                                        className="text-blue-400">{text[2]}</a></li>
-                ))}
-              </ul>
+              <Typography variant="h6" color="blue-gray" className="mt-2">
+                {categ}
+              </Typography>
+              {categories[years][categ].map((text, index) => (
+                <Typography key={index} className="items-center font-light">- {text[0]}
+                  <a href={text[2]} className="text-blue-400">{text[1]}</a>
+                </Typography>
+              ))}
             </div>
           ))}
         </div>
       ))}
-      <br /><br />
-      <h2 className="text-1xl lg:text-2xl text-gray-500">
-        For full list of publications, please visit <a
-        href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js"><u>this</u></a> page.
-      </h2>
+      <div className="container mx-auto px-8 lg:flex justify-center">
+        <p className="mt-8 md:mt-12">
+          <Router>
+            <a href="/fullPublications" target="_blank" rel="noopener noreferrer" className="sip-link">
+                <Button size="lg">Full list of publications</Button>
+            </a>
+            <Routes>
+              <Route path="/fullPublications" element={<full_publications />} />
+            </Routes>
+          </Router>
+        </p>
+      </div>
     </div>
   );
 };
