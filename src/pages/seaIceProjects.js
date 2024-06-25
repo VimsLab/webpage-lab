@@ -1,0 +1,419 @@
+import React, { useEffect, useState } from 'react';
+import LabelText from '../components/LabelText';
+import Layout from '../components/layout/Layout';
+import SplitSection from '../components/SplitSection';
+import newsData from '../data/news-data';
+import projectsData from '../data/projects-data';
+import photosData from '../data/photos-data';
+import { StaticImage } from 'gatsby-plugin-image';
+import Image from '../components/ImageComponent';
+import { GatsbyImagesProvider } from '../components/ImagesContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+import {
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faPinterest,
+  faTwitter,
+  faWhatsapp
+} from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faGlobe, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { Button, Card, CardBody, CardFooter, CardHeader, Tooltip, Typography } from '@material-tailwind/react';
+
+library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagram, faHouse, faUser, faLinkedin);
+
+
+// let max_years = 3;
+// const pubsFileURL = 'https://raw.githubusercontent.com/VimsLab/vims-publications-list/main/publications-list.js';
+
+// const fetchAndProcessJsFile = async (url, setData, maxYear) => {
+//   const xhr = new XMLHttpRequest();
+
+//   xhr.open('GET', url, true);
+//   xhr.onreadystatechange = function() {
+//     if (xhr.readyState === 4) {
+//       if (xhr.status === 200) {
+//         const jsContent = xhr.responseText;
+
+//         const match = jsContent.match(/export\s+default\s+(\[.*\]);/s);
+//         if (match) {
+//           const data = match[1];
+//           try {
+//             const parsedData = JSON.parse(data);
+
+//             const filteredData = parsedData.filter(entry => parseInt(entry.year, 10) >= maxYear);
+//             setData(filteredData);
+//           } catch (error) {
+//             console.error('Error parsing JSON data:', error);
+//           }
+//         } else {
+//           console.error('Failed to extract data from the .js file');
+//         }
+//       } else {
+//         console.error('Error fetching the .js file:', xhr.statusText);
+//       }
+//     }
+//   };
+
+//   xhr.send();
+// };
+
+// const App = () => {
+//   const [filteredData, setFilteredData] = useState([]);
+//   const [categories, setCategories] = useState({});
+//   const currentYear = new Date().getFullYear();
+//   const maxYear = currentYear - max_years;
+
+//   useEffect(() => {
+//     fetchAndProcessJsFile(pubsFileURL, setFilteredData, maxYear);
+//   }, [maxYear]);
+
+//   useEffect(() => {
+//     const updatedCategories = {};
+
+//     filteredData.forEach(entry => {
+//       if (entry.year !== 'year') {
+//         if (!updatedCategories[entry.year + ' ']) {
+//           updatedCategories[entry.year + ' '] = {};
+//         }
+
+//         if (!updatedCategories[entry.year + ' '][entry.category]) {
+//           updatedCategories[entry.year + ' '][entry.category] = [];
+//         }
+
+//         if ('link_text' in entry) {
+//           updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_url, entry.link_text]]);
+//         } else {
+//           updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
+//         }
+//       }
+//     });
+
+//     setCategories(updatedCategories);
+//   }, [filteredData]);
+
+//   return (
+//     <div className="App">
+//       {Object.keys(categories).map(years => (
+//         <div key={years}>
+//           <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
+//           {Object.keys(categories[years]).map(categ => (
+//             <div key={categ}>
+//               <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
+//               <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
+//                 {categories[years][categ].map((text, index) => (
+//                   <li key={index} className="items-center">{text[0]} <a href={text[1]}
+//                                                                         className="text-blue-400">{text[2]}</a></li>
+//                 ))}
+//               </ul>
+//             </div>
+//           ))}
+//         </div>
+//       ))}
+//       <br /><br />
+//       <h2 className="text-1xl lg:text-2xl text-gray-500">
+//         For full list of publications, please visit <a
+//         href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js"><u>this</u></a> page.
+//       </h2>
+//     </div>
+//   );
+// };
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3 // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2 // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1 // optional, default to 1.
+  }
+};
+
+const SIP = ({ data, deviceType }) => {
+  return (
+    <Layout>
+      <section className="pt-20 md:pt-40">
+        <div className="container mx-auto px-8 lg:flex">
+          <div className="text-center lg:text-left lg:w-1/2">
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
+              Fundamental Discoveries, Transformative Applications
+            </h1>
+            <p className="text-xl lg:text-2xl mt-6 font-light">
+              Discover VIMS Lab @ University of Delaware
+            </p>
+            <p className="mt-4 text-gray-600">Video/Image Modeling and Synthesis (VIMS) Lab</p>
+            <p className="mt-8 md:mt-12">
+              <a href="mailto:vims@cis.udel.edu">
+                <Button size="lg">Contact</Button>
+              </a>
+            </p>
+          </div>
+          <div className="lg:w-2/5">
+            <StaticImage src="../images/landing-glasses.jpg" alt="Landing" />
+          </div>
+        </div>
+      </section>
+      <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
+        <div className="container mx-auto text-center">
+          <LabelText className="mb-8 text-gray-600 text-center">Projects</LabelText>
+          <p className="mt-4">
+            Our team is developing deep learning and machine learing models for sea ice image analysis. We have designed methods for motion tracking,
+            lead detection, and segmentation of sea ice images. We have also developed an online database system to serve cruise-based spatiotemporal Big Data on sea ice. 
+            It also serves as a collaborative platform for the discovery of open-source methods analyzing sea ice. To quantitatively measure sea ice, the VIMS lab has 
+            designed and built a 3D camera system called PSITRES.
+          </p>
+          <br></br><br></br><br></br>
+          <div className="flex flex-wrap content-center">
+            {projectsData.map(projects => (
+              // <div key={projects.key} className="flex-auto">
+              <div key={projects.key} className="mr-4 mb-5">
+                {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
+                {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
+                {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
+                <Card
+                  className="card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200">
+                  <CardHeader floated={false} color="blue-gray">
+                    <GatsbyImagesProvider>
+                      <Image src={projects.image} alt="card-image" />
+                    </GatsbyImagesProvider>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="mb-3 flex justify-center size-auto">
+                      <Typography variant="h5" color="blue-gray">
+                        <span class="inline-block">{projects.title}</span>
+
+                      </Typography>
+                    </div>
+                    <Typography color="gray">
+                      {projects.content}
+                    </Typography>
+                  </CardBody>
+                  <CardFooter className="pt-3">
+                    <a href={projects.readMore} className="inline-block">
+                      <Button size="sm" fullWidth={true}>
+                        Learn More
+                      </Button>
+                    </a>
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* <section id="publications">
+        <div className="container mx-auto items-stretch">
+          <LabelText className="mb-8 text-gray-600 text-center">Publications</LabelText>
+          {App()}
+        </div>
+      </section> */}
+
+      {/* <section id="news" className="py-20 lg:py-40">
+        <div className="container mx-auto">
+          <LabelText className="mb-8 text-gray-600 text-center">News</LabelText>
+          <div className="grid grid-cols-3  lg:grid-cols-3 items-stretch md:flex-row md:-mx-3">
+
+            {newsData.map(news => (
+              <div key={news.key} className="flex-1 px-3 py-3 lg:py-6">
+
+                <Card className="flex flex-col mt-6 w-80 h-full">
+                  <CardHeader color="blue-gray" className="relative h-60 mt-6">
+                    <GatsbyImagesProvider>
+                      <Image src={news.image} alt="card-image" />
+                    </GatsbyImagesProvider>
+                  </CardHeader>
+                  <CardBody>
+                    <Typography variant="h5" color="blue-gray" className="mb-2">
+                      {news.title}
+                    </Typography>
+                    <Typography>
+                      {news.content}
+                    </Typography>
+                  </CardBody>
+                  <CardFooter className="pt-0">
+                    <a href={news.readMore}>
+                      <Button>Read More</Button>
+                    </a>
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section id="team" className="py-20 lg:py-40">
+        <div className="container mx-auto">
+          <LabelText className="mb-8 text-gray-600 text-center">Team</LabelText>
+          <div className="grid grid-cols-4 items-stretch md:flex-row md:-mx-3">
+
+            {teamData.map(teamMember => (
+              <div key={teamMember.key} className="flex-1 px-3 py-1 lg:py-3">
+                <Card className="flex flex-col mt-6 w-70 h-full">
+                  <CardHeader floated={false} className="">
+                    <GatsbyImagesProvider>
+                      <Image src={teamMember.image} alt="card-image" />
+                    </GatsbyImagesProvider>
+                  </CardHeader>
+                  <CardBody className="text-center pb-4">
+                    <Typography variant="h4" color="blue-gray" className="mb-2">
+                      {teamMember.name}
+                    </Typography>
+                    <Typography color="blue-gray" className="font-medium">
+                      {teamMember.title}
+                    </Typography>
+                    <Typography color="blue-gray" className="font-small h-8">
+                      {teamMember.research_areas}
+                    </Typography>
+                  </CardBody>
+                  <CardFooter className="flex justify-center gap-1 pt-4 pb-1">
+                    {teamMember.email && (
+                      <Tooltip content={`e-mail: ${teamMember.email}`}>
+                        <Typography
+                          as="a"
+                          href={`mailto:${teamMember.email}`}
+                          variant="lead"
+                          color="black"
+                        >
+                          <FontAwesomeIcon className="p-5" icon={faEnvelope} />
+                          <i className="fab fa-envelope" />
+                        </Typography>
+                      </Tooltip>
+                    )}
+                    {teamMember.linkedin && (
+                      <Tooltip content="Follow">
+                        <Typography
+                          as="a"
+                          href={teamMember.linkedin}
+                          variant="lead"
+                          color="blue"
+                        >
+                          <FontAwesomeIcon className="p-5" icon="fab fa-linkedin text-lg" />
+                        </Typography>
+                      </Tooltip>
+                    )}
+                    {teamMember.link && (
+                      <Tooltip content="Visit personal website">
+                        <Typography
+                          as="a"
+                          href={teamMember.link}
+                          variant="lead"
+                        >
+                          <FontAwesomeIcon className="p-5" icon={faGlobe} />
+                        </Typography>
+                      </Tooltip>
+                    )}
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>
+          <div className="container mx-auto px-8 lg:flex justify-center">
+            <p className="mt-8 md:mt-12">
+              <a href="https://www.eecis.udel.edu/wiki/vims/index.php/Main/People">
+                <Button size="lg">Alumni</Button>
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="photos" className="py-20 lg:py-40">
+        <div className="container mx-auto">
+          <LabelText className="mb-8 text-gray-600 text-center">Photos</LabelText>
+          <Carousel
+            swipeable={false}
+            draggable={false}
+            showDots={true}
+            responsive={responsive}
+            ssr={true} // means to render carousel on server-side.
+            infinite={true}
+            autoPlay={deviceType !== 'mobile' ? true : false}
+            autoPlaySpeed={5000}
+            keyBoardControl={true}
+            customTransition="all .5"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={['tablet', 'mobile']}
+            deviceType={deviceType}
+            dotListClass="custom-dot-list-style"
+            focusOnSelect={true}
+            itemClass="carousel-item-padding-40-px"
+          >
+            {photosData.map(photo => (
+              <div className="p-3">
+                <GatsbyImagesProvider>
+                  <Image src={photo.image} alt={photo.key} hasBorder={true} />
+                </GatsbyImagesProvider>
+                <Typography variant="small" color="blue-gray" className="mb-2">
+                  {photo.title}
+                </Typography>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      </section>
+
+      <section id="testimonials" className="py-20 lg:py-40">
+        <div className="container mx-auto">
+          <LabelText className="mb-8 text-gray-600 text-center">Computational Resources</LabelText>
+          <SplitSection
+            id="services"
+            primarySlot={
+              <div className="lg:pr-32 xl:pr-48">
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">Two servers with 4xA6000 each</h2>
+                <br></br>
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">Two workstations with 2x3090 each</h2>
+                <br></br>
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">Three workstations with 4x2080Ti
+                  each</h2>
+                <br></br>
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One workstation with 2x2080Ti</h2>
+                <br></br>
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One workstation with 1x2080Ti and
+                  1x1080Ti</h2>
+                <br></br>
+                <h2 className="text-2xl lg:text-2xl text-gray-600 text-center">One server with 2xPascal GPUs</h2>
+              </div>
+            }
+            secondarySlot={
+              <div className="gpu">
+                <StaticImage src="../images/Machine.png" alt="Logo" />
+              </div>
+            }
+          />
+        </div>
+      </section>
+      <section className="container mx-auto my-20 py-24 bg-gray-200 rounded-lg text-center">
+        <h3 className="text-5xl font-semibold">Join us in advancing computer vision</h3>
+        <p className="mt-8 text-xl font-light ml-20 mr-20">
+          Our lab is at the forefront of advancing computer vision through deep learning. Get involved and help us
+          explore the next generation of visual understanding technologies.
+        </p>
+        <p className="mt-8">
+          <a href="mailto:vims@cis.udel.edu">
+            <Button size="xl">Contact</Button>
+          </a>
+        </p>
+      </section> */}
+    </Layout>
+
+  );
+};
+
+
+export default SIP;
