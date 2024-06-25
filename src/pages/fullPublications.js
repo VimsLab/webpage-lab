@@ -4,10 +4,7 @@ import Layout from '../components/layout/Layout';
 import PubLayout from '../components/layout/PubLayout';
 import 'react-multi-carousel/lib/styles.css';
 import { StaticImage } from "gatsby-plugin-image";
-import { BrowserRouter } from 'react-router-dom';
 import Button from '../components/Button';
-import { useNavigate } from 'react-router-dom';
-import {Link, navigate} from "gatsby";
 import { Card, CardBody, CardFooter, CardHeader, Tooltip, Typography } from '@material-tailwind/react';
 
 

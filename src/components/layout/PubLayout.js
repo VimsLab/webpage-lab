@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from './Footer';
 // import Header from './Header';
-import OtherHeader from './otherHeader';
+// import OtherHeader from './otherHeader';
 
 const PubLayout = ({ children }) => {
   return (

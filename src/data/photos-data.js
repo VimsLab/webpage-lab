@@ -7,13 +7,13 @@ export default [
   },
   {
     key: 8,
-    title: 'With Dr Bajcsy at Franklin Awards Dinner 2024',
-    image: '2024-franklin-awards.jpeg'
+    title: 'ARL Project Kickoff. Jan, 2024',
+    image: '202401-ARL_UDelKickoff_GroupPicsai.jpeg'
   },
   {
     key: 7,
-    title: 'ARL Project Kickoff. Jan, 2024',
-    image: '202401-ARL_UDelKickoff_GroupPicsai.jpeg'
+    title: 'With Yann LeCun at MICCAI 2023',
+    image: '2023-miccai-lecun.jpeg'
   },
   {
     key: 6,
