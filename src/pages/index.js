@@ -13,6 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import full_publications from './fullPublications';
+import { BrowserRouter as Router, Route, Routes, Link, BrowserRouter } from 'react-router-dom';
+import Navigation from './navigation';
+import ReactDOM from 'react-dom';
 
 import {
   faFacebook,
@@ -122,9 +126,14 @@ const App = () => {
       ))}
       <div className="container mx-auto px-8 lg:flex justify-center">
         <p className="mt-8 md:mt-12">
-          <a href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js">
-            <Button size="lg">Full list of publications</Button>
-          </a>
+          <Router>
+            <a href="/fullPublications" target="_blank" rel="noopener noreferrer" className="sip-link">
+              <Button size="lg">Full list of publications</Button>
+            </a>
+            <Routes>
+              <Route path="/fullPublications" element={<full_publications />} />
+            </Routes>
+          </Router>
         </p>
       </div>
     </div>

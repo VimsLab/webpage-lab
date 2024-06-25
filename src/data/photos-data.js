@@ -2,8 +2,8 @@ export default [
   // Most recent goes first
   {
     key: 9,
-    title: 'With Dr Bajcsy at Franklin Awards Dinner 2024',
-    image: '2024-franklin-awards.jpeg'
+    title: 'VIMS Lab at UD CIS 60th Anniversary',
+    image: 'vims_lab_picture.jpg'
   },
   {
     key: 8,
