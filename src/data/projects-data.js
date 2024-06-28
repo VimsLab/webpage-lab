@@ -4,7 +4,8 @@ export default [
     title: 'Sea ice analysis',
     content: 'Identifying and understanding various characteristics of sea ice',
     image: 'environment_health_icon.png',
-    readMore: 'https://bigdatavision.org/environmenthealth/'
+    // readMore: 'https://bigdatavision.org/environmenthealth/'
+    readMore: '/seaIceProjects'
   },
   {
     key: 2,

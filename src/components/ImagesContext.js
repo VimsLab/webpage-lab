@@ -5,6 +5,7 @@ function GatsbyImagesProvider({ children }) {  const data = useStaticQuery(graph
     allFile(filter: { sourceInstanceName: { eq: "images" } }) {
       nodes {
         relativePath
+        publicURL
         childImageSharp {
           gatsbyImageData(layout: FULL_WIDTH)
         }

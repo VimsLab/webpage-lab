@@ -128,6 +128,7 @@ const App = () => {
         <p className="mt-8 md:mt-12">
           {/* <Router> */}
             <a href="/fullPublications" target="_blank" rel="noopener noreferrer" className="sip-link">
+            {/* <a href="/seaIceProjects" target="_blank" rel="noopener noreferrer" className="sip-link"> */}
               <Button size="lg">Full list of publications</Button>
             </a>
             {/* <Routes>

@@ -1,129 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import LabelText from '../components/LabelText';
-import Layout from '../components/layout/Layout';
+import OtherLayout from '../components/layout/OtherLayout';
 import SplitSection from '../components/SplitSection';
-import newsData from '../data/news-data';
-import projectsData from '../data/projects-data';
-import photosData from '../data/photos-data';
+// import newsData from '../data/news-data';
+// import projectsData from '../data/projects-data';
+import seaIceProjectsData from '../data/seaice-data'
+// import photosData from '../data/photos-data';
 import { StaticImage } from 'gatsby-plugin-image';
 import Image from '../components/ImageComponent';
 import { GatsbyImagesProvider } from '../components/ImagesContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
 
-import {
-  faFacebook,
-  faGithub,
-  faInstagram,
-  faLinkedin,
-  faPinterest,
-  faTwitter,
-  faWhatsapp
-} from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faGlobe, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+// import {
+//   faFacebook,
+//   faGithub,
+//   faInstagram,
+//   faLinkedin,
+//   faPinterest,
+//   faTwitter,
+//   faWhatsapp
+// } from '@fortawesome/free-brands-svg-icons';
+// import { faEnvelope, faGlobe, faHouse } from '@fortawesome/free-solid-svg-icons';
+// import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { Button, Card, CardBody, CardFooter, CardHeader, Tooltip, Typography } from '@material-tailwind/react';
-
-library.add(faTwitter, faFacebook, faPinterest, faGithub, faWhatsapp, faInstagram, faHouse, faUser, faLinkedin);
-
-
-// let max_years = 3;
-// const pubsFileURL = 'https://raw.githubusercontent.com/VimsLab/vims-publications-list/main/publications-list.js';
-
-// const fetchAndProcessJsFile = async (url, setData, maxYear) => {
-//   const xhr = new XMLHttpRequest();
-
-//   xhr.open('GET', url, true);
-//   xhr.onreadystatechange = function() {
-//     if (xhr.readyState === 4) {
-//       if (xhr.status === 200) {
-//         const jsContent = xhr.responseText;
-
-//         const match = jsContent.match(/export\s+default\s+(\[.*\]);/s);
-//         if (match) {
-//           const data = match[1];
-//           try {
-//             const parsedData = JSON.parse(data);
-
-//             const filteredData = parsedData.filter(entry => parseInt(entry.year, 10) >= maxYear);
-//             setData(filteredData);
-//           } catch (error) {
-//             console.error('Error parsing JSON data:', error);
-//           }
-//         } else {
-//           console.error('Failed to extract data from the .js file');
-//         }
-//       } else {
-//         console.error('Error fetching the .js file:', xhr.statusText);
-//       }
-//     }
-//   };
-
-//   xhr.send();
-// };
-
-// const App = () => {
-//   const [filteredData, setFilteredData] = useState([]);
-//   const [categories, setCategories] = useState({});
-//   const currentYear = new Date().getFullYear();
-//   const maxYear = currentYear - max_years;
-
-//   useEffect(() => {
-//     fetchAndProcessJsFile(pubsFileURL, setFilteredData, maxYear);
-//   }, [maxYear]);
-
-//   useEffect(() => {
-//     const updatedCategories = {};
-
-//     filteredData.forEach(entry => {
-//       if (entry.year !== 'year') {
-//         if (!updatedCategories[entry.year + ' ']) {
-//           updatedCategories[entry.year + ' '] = {};
-//         }
-
-//         if (!updatedCategories[entry.year + ' '][entry.category]) {
-//           updatedCategories[entry.year + ' '][entry.category] = [];
-//         }
-
-//         if ('link_text' in entry) {
-//           updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, entry.link_url, entry.link_text]]);
-//         } else {
-//           updatedCategories[entry.year + ' '][entry.category] = updatedCategories[entry.year + ' '][entry.category].concat([[entry.text, '', '']]);
-//         }
-//       }
-//     });
-
-//     setCategories(updatedCategories);
-//   }, [filteredData]);
-
-//   return (
-//     <div className="App">
-//       {Object.keys(categories).map(years => (
-//         <div key={years}>
-//           <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-7 pb-1">{years}</h3>
-//           {Object.keys(categories[years]).map(categ => (
-//             <div key={categ}>
-//               <h3 className="mb-2 text-3xl font-semibold text-gray-400 dark:text-white pt-2 pb-1">{categ}</h3>
-//               <ul className="w-full space-y-1 text-gray-500 list-disc list-inside justify dark:text-gray-400">
-//                 {categories[years][categ].map((text, index) => (
-//                   <li key={index} className="items-center">{text[0]} <a href={text[1]}
-//                                                                         className="text-blue-400">{text[2]}</a></li>
-//                 ))}
-//               </ul>
-//             </div>
-//           ))}
-//         </div>
-//       ))}
-//       <br /><br />
-//       <h2 className="text-1xl lg:text-2xl text-gray-500">
-//         For full list of publications, please visit <a
-//         href="https://github.com/VimsLab/vims-publications-list/blob/main/publications-list.js"><u>this</u></a> page.
-//       </h2>
-//     </div>
-//   );
-// };
 
 const responsive = {
   desktop: {
@@ -145,8 +47,8 @@ const responsive = {
 
 const SIP = ({ data, deviceType }) => {
   return (
-    <Layout>
-      <section className="pt-20 md:pt-40">
+    <OtherLayout>
+      {/* <section className="pt-20 md:pt-40">
         <div className="container mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
@@ -166,54 +68,48 @@ const SIP = ({ data, deviceType }) => {
             <StaticImage src="../images/landing-glasses.jpg" alt="Landing" />
           </div>
         </div>
-      </section>
-      <section id="projects" className="py-20 lg:pb-40 lg:pt-48">
-        <div className="container mx-auto text-center">
-          <LabelText className="mb-8 text-gray-600 text-center">Projects</LabelText>
-          <p className="mt-4">
-            Our team is developing deep learning and machine learing models for sea ice image analysis. We have designed methods for motion tracking,
-            lead detection, and segmentation of sea ice images. We have also developed an online database system to serve cruise-based spatiotemporal Big Data on sea ice. 
-            It also serves as a collaborative platform for the discovery of open-source methods analyzing sea ice. To quantitatively measure sea ice, the VIMS lab has 
-            designed and built a 3D camera system called PSITRES.
+      </section> */}
+      <section id="projects" className="py-10 lg:pb-10 lg:pt-10">
+        <div className="container mx-auto">
+          <LabelText className="mb-2 text-gray-600 text-center">Projects</LabelText>
+          <p className="mt-4 ml-4 mr-4">
+            VIMS Lab works on Sea Ice include high-resolution motion analysis of sea ice fields 
+            using optical flow, deep learning for detecting sea ice leads, and a web app for analyzing sea ice rasters. 
+            Additionally, we worked on 3D reconstruction of sea ice with custom stereo algorithms, understanding 
+            non-rigid sea ice dynamics, and coastal ice dynamics through reflector track extraction. 
+            Some works focus on motion analysis of satellite imagery and 3D non-rigid motion analysis from cloud image sequences.
           </p>
-          <br></br><br></br><br></br>
-          <div className="flex flex-wrap content-center">
-            {projectsData.map(projects => (
-              // <div key={projects.key} className="flex-auto">
-              <div key={projects.key} className="mr-4 mb-5">
-                {/* <Card className="w-full max-w-[26rem] shadow-lg"> */}
-                {/* <Card className="flex flex-col mt-6 w-64 h-full shadow-lg"> */}
-                {/* <Card className='card card-compact shadow-xl col-span-1 h-fit bg-gray-100 hover:bg-base-200'> */}
-                <Card
-                  className="card card-compact shadow-xl col-span-1 gap-5 w-28 md:w-44 lg:w-60 h-full bg-gray-100 hover:bg-base-200">
-                  <CardHeader floated={false} color="blue-gray">
-                    <GatsbyImagesProvider>
-                      <Image src={projects.image} alt="card-image" />
-                    </GatsbyImagesProvider>
-                  </CardHeader>
-                  <CardBody>
-                    <div className="mb-3 flex justify-center size-auto">
-                      <Typography variant="h5" color="blue-gray">
-                        <span class="inline-block">{projects.title}</span>
-
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-stretch md:flex-row md:-mx-3">
+              {seaIceProjectsData.map(projects => (
+                <div key={projects.key} className="flex-1 px-3 py-3 lg:py-6">
+                  <Card className="flex flex-col mt-6 w-70 h-full">
+                    <CardHeader floated={false} color="blue-gray">
+                      <GatsbyImagesProvider>
+                        <Image src={projects.image} alt="card-image" />
+                      </GatsbyImagesProvider>
+                    </CardHeader>
+                    <CardBody>
+                      <div className="mb-3 flex justify-center size-auto">
+                        <Typography variant="h5" color="blue-gray">
+                          <span class="inline-block">{projects.title}</span>
+                        </Typography>
+                      </div>
+                      <Typography color="gray">
+                        {projects.content}
                       </Typography>
-                    </div>
-                    <Typography color="gray">
-                      {projects.content}
-                    </Typography>
-                  </CardBody>
-                  <CardFooter className="pt-3">
-                    <a href={projects.readMore} className="inline-block">
-                      <Button size="sm" fullWidth={true}>
-                        Learn More
-                      </Button>
-                    </a>
-                  </CardFooter>
-                </Card>
-              </div>
-            ))}
+                    </CardBody>
+                    <CardFooter className="pt-3">
+                      <a href={projects.readMore} className="inline-block">
+                        <Button size="sm" fullWidth={true}>
+                          Learn More
+                        </Button>
+                      </a>
+                    </CardFooter>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
       </section>
 
       {/* <section id="publications">
@@ -410,7 +306,7 @@ const SIP = ({ data, deviceType }) => {
           </a>
         </p>
       </section> */}
-    </Layout>
+    </OtherLayout>
 
   );
 };
