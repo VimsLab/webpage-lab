@@ -30,8 +30,8 @@ In your terminal:
 
 ### For both test and final versions
 3. It will create a folder called `public`.
-4. Add the `favicon.ico` into the `public` folder. This is to show an icon in the web browser tab.
-5. You can give `public` folder any name of your choice, but let's say we keep the name `public`. Compress this folder.
+4. Check if inside `public` folder a file called `favicon.ico` is available. If it is, please go to the following step, if not, add the `favicon.ico` into the `public` folder. This is to show an icon in the web browser tab.
+5. You can give `public` folder any name of your choice, but let's say we keep the name `public` this time. Compress this folder.
 6. Go to GoDaddy File Manager in the `public_html` folder. If you notice there is another folder with the same name, please change the name of the existing one. This is only for security reasons in case the new version does not work. 
 7. Upload your compressed folder.
 
