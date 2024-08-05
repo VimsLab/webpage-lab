@@ -1,6 +1,14 @@
 export default [
-    {
-      key: 1,
+  {
+    key: 10,
+    title: 'SEA ICE MOTION ESTIMATION DATASET FROM SIDEx',
+    techniques: 'MOTION TRACKING, OPTICAL FLOW',
+    content: 'A dataset in NetCDF format containing our motion estimation for SIDEx',
+    image: 'sidex-motion-example.png',
+    readMore: 'https://arcticdata.io/catalog/view/doi%3A10.18739%2FA25D8NG8W'
+  },
+  {
+      key: 9,
       title: 'SEA ICE MOTION ANALYSIS',
       techniques: 'MOTION TRACKING, OPTICAL FLOW',
       content: 'A method for high resolution and accurate motion estimates of the sea ice field',
@@ -8,7 +16,7 @@ export default [
       readMore: 'https://vims.cis.udel.edu/iceresearch/motion.html'
     },
     {
-      key: 2,
+      key: 8,
       title: 'SEA ICE LEAD DETECTION',
       techniques: 'HYBRID NEURAL NETS, BOUNDARY DETECTION',
       content: 'A deep learning approach for sea ice lead detection from visible and C-band images',
@@ -16,7 +24,7 @@ export default [
       readMore: 'https://vims.cis.udel.edu/iceresearch/LeadsGeneral.html'
     },
     {
-      key: 3,
+      key: 7,
       title: 'SEA ICE IMAGE DATABASE',
       techniques: 'BIG DATA, DATABASE',
       content: 'A web app for the analysis of sea ice rasters captured by the PSITRES camera system',
@@ -24,7 +32,7 @@ export default [
       readMore: 'https://vims.cis.udel.edu/geo/ice/Home/'
     },
     {
-      key: 4,
+      key: 6,
       title: 'PSITRES',
       techniques: 'CAMERA SYSTEM, STEREO',
       content: 'A 3D camera system build by VIMS Lab to quantitatively measure sea ice',
@@ -40,7 +48,7 @@ export default [
       readMore: 'https://www.eecis.udel.edu/wiki/vims/index.php/Main/IceStereo'
     },
     {
-      key: 6,
+      key: 4,
       title: 'NON-RIGID SEA ICE DYNAMICS',
       techniques: 'MOTION TRACKING, REMOTE SENSING',
       content: 'A non-intrusive method to track sea ice and understand the sea ice mass balance',
@@ -48,7 +56,7 @@ export default [
       readMore: 'https://www.eecis.udel.edu/wiki/vims/index.php/Main/IceNonrigid'
     },
     {
-      key: 7,
+      key: 3,
       title: 'COASTAL ICE DYNAMICS',
       techniques: 'FEATURE TRACKING, EVENT DETECTION',
       content: 'A method to automatically extract tracks of reflectors and derive velocity fields for moving ice',
@@ -56,7 +64,7 @@ export default [
       readMore: 'https://www.eecis.udel.edu/wiki/vims/index.php/Main/Radar'
     },
     {
-      key: 8,
+      key: 2,
       title: 'MOTION ANALYSIS OF SATELLITE IMAGERY',
       techniques: 'REMOTE SENSING, MOTION TRACKING',
       content: 'A method to extracture structure/motion in a sequences of cloud images',
@@ -64,7 +72,7 @@ export default [
       readMore: 'https://www.eecis.udel.edu/wiki/vims/index.php/Main/MotionGPU'
     },
     {
-      key: 9,
+      key: 1,
       title: '3D NONRIGID MOTION ANALYSIS',
       techniques: 'REMOTE SENSING, MOTION TRACKING',
       content: 'A method to extract motion and structure from 2D cloud image sequences without known correspondences',
