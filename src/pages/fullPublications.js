@@ -140,7 +140,7 @@ const goBack = () => {
             </div>
             <div className="flex mt-4 sm:mt-0">
             </div>
-                <a href="mailto:vims@cis.udel.edu">
+                <a href="mailto:chandrak@udel.edu">
                 <Button>Contact</Button>
                 </a>
             </div>
