@@ -106,7 +106,7 @@ const Header = () => {
                 Resources
               </AnchorLink>
             </div>
-            <a href="mailto:vims@cis.udel.edu">
+            <a href="mailto:chandrak@udel.edu">
               <Button>Contact</Button>
             </a>
           </div>

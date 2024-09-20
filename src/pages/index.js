@@ -173,7 +173,7 @@ const Index = ({ data, deviceType }) => {
             </p>
             <p className="mt-4 text-gray-600">Video/Image Modeling and Synthesis (VIMS) Lab</p>
             <p className="mt-8 md:mt-12">
-              <a href="mailto:vims@cis.udel.edu">
+              <a href="mailto:chandrak@udel.edu">
                 <Button size="lg">Contact</Button>
               </a>
             </p>
@@ -416,7 +416,7 @@ const Index = ({ data, deviceType }) => {
           explore the next generation of visual understanding technologies.
         </p>
         <p className="mt-8">
-          <a href="mailto:vims@cis.udel.edu">
+          <a href="mailto:chandrak@udel.edu">
             <Button size="xl">Contact</Button>
           </a>
         </p>
