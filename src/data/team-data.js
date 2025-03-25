@@ -55,14 +55,6 @@ export default [
     email: 'leeff@udel.edu'
   },
   {
-    key: 'martin',
-    name: 'Daniela Martin',
-    title: 'Ph.D. Student',
-    image: 'daniela.jpeg',
-    research_areas: 'Deep Learning, Computer Vision, Remote Sensing and Astrophysics',
-    email: 'dmartinv@udel.edu'
-  },
-  {
     key: 'rust',
     name: 'Tyler Rust',
     title: 'Ph.D. Student',
@@ -79,6 +71,14 @@ export default [
     email: 'mcnally@udel.edu'
   },
   {
+    key: 'martin',
+    name: 'Daniela Martin',
+    title: 'Ph.D. Student',
+    image: 'daniela.jpeg',
+    research_areas: 'Deep Learning, Computer Vision, Remote Sensing and Astrophysics',
+    email: 'dmartinv@udel.edu'
+  },
+  {
     key: 'odonnell',
     name: 'Kyle O\'Donnell',
     title: 'Ph.D. Student',
@@ -87,11 +87,11 @@ export default [
     email: 'kpod@udel.edu'
   },
   {
-    key: 'ankevar',
-    name: 'Tejas Anvekar',
+    key: 'brendon',
+    name: 'Brendon Gutierrez-Rebettge',
     title: 'Ph.D. Student',
-    image: 'no-photo.png',
-    research_areas: 'Deep Learning and Computer Vision',
-    email: 'tanvekar@udel.edu'
+    image: 'brendon.jpg',
+    research_areas: 'Biomedical Applications of Computer Vision and Human-Computer Interaction',
+    email: 'bdgr@udel.edu'
   }
 ];

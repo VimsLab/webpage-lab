@@ -1,6 +1,21 @@
 export default [
   // Most recent goes first
   {
+    key: 13,
+    title: 'WACV2025 Test of Time Award',
+    image: '202503-wacv-award-1.jpg'
+  },
+  {
+    key: 12,
+    title: 'WACV2025 Test of Time Award',
+    image: '202503-wacv-award-2.jpg'
+  },
+  {
+    key: 11,
+    title: 'WACV2025 Test of Time Award',
+    image: '202503-wacv-award-3.jpg'
+  },
+  {
     key: 10,
     title: 'VIMS Lab at UD CIS 60th Anniversary',
     image: 'vims_lab_picture.jpg'

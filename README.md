@@ -11,12 +11,21 @@ In your terminal:
 - Once the previous step has been completed, you will not need to install anything else, as all the dependencies and needed version of the dependencies were installed when you ran `npm install`. What it did was to install based on the contents of the file `package.json`.
 - Every time you install a new dependency after your first successful installation of dependencies, you need to stop the server (CTRL + C) and run `npm install`.
 
-
+## Run dev mode (for local testing)
 ### Run on Windows Powershell
-- Run `npm run develop` to start the dev site.
+- Run `npm run develop` to start the dev site. It will run in http://localhost:8000/.
 
 ### Run on Linux
-- Run `gatsby develop` o `npm run develop` to start the dev site.
+- Run `gatsby develop` o `npm run develop` to start the dev site. It will run in http://localhost:8000/.
+
+### Common issue and easy fix
+It may happen that you follow all the instructions and the dev site does not run. In that case, you should delete the following folders (if exist) and all their contents:
+- `.cache`
+- `node_modules`
+- `public`
+
+After this deletion, you will run the `npm install` command again, and the folders will be created again automatically. When this process finishes, you will try to run the dev mode site again.
+
 
 ## Build and deployment in GoDaddy
 **Note:** The following process was tested in Linux, but it might work the same in Windows Powershell.
@@ -65,4 +74,4 @@ This project is a Gatsby-based landing webpage created using the [Lander theme](
 - [**react-multi-carousel:**](https://www.npmjs.com/package/react-multi-carousel) This one was used for the Photos section, since the carousels from Material Tailwind were not working for this project.
 
 ### Why These Technologies
-We chose to rebuild the landing page using these technologies to leverage modern web development practices. Unlike the previous PHP-based webpage, these technologies provide better performance, a smoother developer experience, and enhanced flexibility for building dynamic and responsive user interfaces.
+We chose to rebuild the landing page using these technologies to leverage modern web development practices. Unlike the previous PHP-based webpage, these technologies provide better performance, a smoother developer experience, and enhanced flexibility for building dynamic and responsive user interfaces.**
