@@ -16,6 +16,51 @@ export default [
     image: '202503-wacv-award-3.jpg'
   },
   {
+    key: 22,
+    title: 'Discussions with Flaming Phoenix Robotics team, Pennsylvania',
+    image: '202412-flamming-visit-1.png'
+  },
+  {
+    key: 21,
+    title: 'Discussions with Flaming Phoenix Robotics team, Pennsylvania',
+    image: '202412-flamming-visit-2.JPG'
+  },
+  {
+    key: 20,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-1.jpg'
+  },
+  {
+    key: 19,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-2.jpg'
+  },
+  {
+    key: 18,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-3.jpg'
+  },
+  {
+    key: 17,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-4.jpg'
+  },
+  {
+    key: 16,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-5.jpg'
+  },
+  {
+    key: 15,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-6.jpg'
+  },
+  {
+    key: 14,
+    title: 'Sanjivani, Shirdi visit 2024',
+    image: '2024-sanjivani-7.png'
+  },
+  {
     key: 10,
     title: 'VIMS Lab at UD CIS 60th Anniversary',
     image: 'vims_lab_picture.jpg'
@@ -68,7 +113,7 @@ export default [
   {
     key: 1,
     title:
-      'Current and past VIMS lab members meeting at CVPR. Long Beach, 2019',
+      'Former VIMS lab members meeting at CVPR. Long Beach, 2019',
     image: '4-1.jpg'
   },
 ];
