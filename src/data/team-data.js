@@ -15,14 +15,6 @@ export default [
     email: 'saponaro@udel.edu'
   },
   {
-    key: 'bhattarai',
-    name: 'Ashuta Bhattarai',
-    title: 'Ph.D. Student',
-    image: 'ashuta400.png',
-    research_areas: 'Deep learning, Image Classification, Virtual Reality, and Machine Learning',
-    email: 'ashutab@udel.edu'
-  },
-  {
     key: 'dulam',
     name: 'Rohit Venkata Sai Dulam',
     title: 'Ph.D. Student',
@@ -71,20 +63,20 @@ export default [
     email: 'mcnally@udel.edu'
   },
   {
-    key: 'martin',
-    name: 'Daniela Martin',
-    title: 'Ph.D. Student',
-    image: 'daniela.jpeg',
-    research_areas: 'Deep Learning, Computer Vision, Remote Sensing and Astrophysics',
-    email: 'dmartinv@udel.edu'
-  },
-  {
     key: 'odonnell',
     name: 'Kyle O\'Donnell',
     title: 'Ph.D. Student',
     image: 'kyle.jpg',
     research_areas: 'Deep Learning, Computer Vision, and Edge AI Deployment',
     email: 'kpod@udel.edu'
+  },
+  {
+    key: 'martin',
+    name: 'Daniela Martin',
+    title: 'Ph.D. Student',
+    image: 'daniela.jpeg',
+    research_areas: 'Deep Learning, Computer Vision, Remote Sensing and Astrophysics',
+    email: 'dmartinv@udel.edu'
   },
   {
     key: 'brendon',
