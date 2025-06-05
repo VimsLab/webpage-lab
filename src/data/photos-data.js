@@ -1,6 +1,16 @@
 export default [
   // Most recent goes first
   {
+    key: 15,
+    title: 'At the Flanklin Medal Dinner, 2025. with CJ Taylor (UPenn) and Jeremy Johnson (Drexel)',
+    image: '202505-dinner2.jpg'
+  },
+  {
+    key: 14,
+    title: 'At the Flanklin Medal Dinner, 2025. With Jeremy Johnson (Drexel)',
+    image: '202505-dinner1.jpg'
+  },
+  {
     key: 13,
     title: 'WACV2025 Test of Time Award',
     image: '202503-wacv-award-1.jpg'
